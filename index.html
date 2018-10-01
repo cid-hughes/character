@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>5e Character Gen</title>
+  <link rel="stylesheet" href="css/page.css" type="text/css">
+  <link rel="stylesheet" href="css/modal.css" type="text/css">
+  <style type="text/css">
+/******************************************************************************/
+/******************************************************************************/
+body {
+    display: grid;
+    grid-template-columns: auto 170px 850px 170px auto;
+    grid-template-rows: auto auto auto auto;
+}
+#left, #right {
+    padding: 0px 10px;
+}
+#left {
+    grid-column: 2;
+    grid-row: 1;
+}
+#page1, #page2, #page3, #page4 {
+    grid-column: 3;
+    grid-row: 1;
+    //transition: z-index 0.5s step-end, opacity 0.5s linear;
+}
+#right {
+    grid-column: 4;
+    grid-row: 1;
+}
+#page1 {
+    z-index: 1;
+    //opacity: 1;
+}
+#page2, #page3, #page4 {
+    z-index: 0;
+    //opacity: 0;
+}
+/**************************************/
+.page {
+    padding: 3% 4.5%;
+}
+/**************************************/
+.button {
+    cursor: pointer;
+    margin: 5px 0px;
+    width: 150px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    box-shadow: inset 0px 3px 3px #AAAAAA, inset 0px -5px 5px #AAAAAA, 0px 0px 5px #444444;
+    //text-shadow: -1px -1px 0px #808080, 1px 1px 0px #EEEEEE;
+    overflow: hidden;
+    padding: 3px 10px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    //font-family: Arial, sans-serif;
+    font-weight: bold;
+    //color: #BBBBBB;
+    color: #000000;
+}
+.button:hover {
+    background-color: #FFFFFF;
+}
+.button:active {
+    background-color: #DDDDDD;
+}
+/******************************************************************************/
+.edit, .print {
+    position: absolute;
+    top: 0px;
+    width: 40px;
+    height: 20px;
+    border: 1px solid #B0B0B0;
+    border-radius: 5px;
+    background-color: #EEEEEE;
+    box-shadow: inset 0px 2px 2px #AAAAAA, inset 0px -3px 3px #BBBBBB;
+    overflow: hidden;
+    padding: 2px 2px 2px 2px;
+    text-align: center;
+    font-family: Arial;
+    font-size: 8pt;
+}
+.edit:hover, .print:hover {
+    background-color: #FFFFFF;
+}
+.edit:active, .print:active {
+    background-color: #DDDDDD;
+}
+.edit {
+    left: 772px;
+}
+.print {
+    left: 727px;
+}
+/******************************************************************************/
+/* A4 8.27" x 11.69" */
+@media print {
+    body {
+        grid-template-columns: auto;
+    }
+    #page1, #page2, #page3, #page4 {
+        //display: block;
+        grid-column: 1;
+        //height: 12in;
+        page-break-after: always;
+    }
+    #left, #right {
+        display: none;
+    }
+    #page1 {
+        //top: 0in;
+    }
+    #page2 {
+        //page-break-before: always;
+        //display: none;
+        grid-row: 2;
+        //top: 2.85in;
+    }
+    #page3 {
+        //page-break-before: always;
+        //display: none;
+        grid-row: 3;
+        //top: 5.8in;
+    }
+    #page4 {
+        //page-break-before: always;
+        //display: none;
+        grid-row: 4;
+        //top: 8.7in;
+    }
+    .print, .edit {
+        display: none;
+        width: 0in;
+        height: 0in;
+        opacity: 0;
+    }
+}
+/******************************************************************************/
+/******************************************************************************/
+  </style>
+  <script src="js/modal.js" type="text/javascript"></script>
+  <script src="js/checkfield.js" type="text/javascript"></script>
+  <script src="js/page.js" type="text/javascript"></script>
+  <script type="text/javascript">
+/******************************************************************************/
+/******************************************************************************/
+page1 = new DnD5ePage1();
+page2 = new DnD5ePage2();
+page3 = new DnD5ePage3();
+page4 = new DnD5ePage4();
+/******************************************************************************/
+/******************************************************************************/
+window.addEventListener("load", ()=>{
+    let left = document.getElementById("left"), right = document.getElementById("right");
+    page1.render(right);
+    page2.render(right);
+    page3.render(right);
+    page4.render(right);
+/******************************************************************************/
+    for (let i=0; i<right.children.length; i++)
+        right.children[i].addEventListener("click", (idx=>e=>{
+            for (let i=0; i<4; i++)
+                document.getElementById("page"+(i+1)).style.zIndex = i==idx?1:0;
+        })(i));
+});
+/******************************************************************************/
+/******************************************************************************/
+  </script>
+ </head>
+ <body>
+  <div id="left">
+   <div class="button">New Character</div>
+  </div>
+  <div id="right">
+   <div class="button">Page 1</div>
+   <div class="button">Page 2</div>
+   <div class="button">Page 3</div>
+   <div class="button">Page 4</div>
+  </div>
+ </body>
+</html>

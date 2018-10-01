@@ -1,0 +1,678 @@
+/******************************************************************************/
+@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
+@import url('https://fonts.googleapis.com/css?family=Megrim');
+/******************************************************************************/
+body {
+    margin: 0px;
+    background-color: LightGrey;
+    font-size: 83.33%;
+}
+div, label, img {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+/******************************************************************************/
+label, .field { display: block; }
+label {
+    border-width: 0px 1px 1px 1px;/* T R B L */
+    border-style: solid;
+    border-color: #B0B0B0;
+    border-radius: 0px 0px 5px 5px;/* TL TR BR BL */
+    background-color: #EEEEEE;
+    white-space: nowrap;
+    padding: 0px;/* T R B L */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.7em;
+    color: #808080;
+}
+.field {
+    border: 1px solid;
+    border-radius: 5px 5px 0px 0px;/* TL TR BR BL */
+    background-color: #FFFFFF;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.3em;/* T R B L */
+    font-family: 'Annie Use Your Telescope', cursive;
+    font-size: 1em;
+}
+.txtbx {
+    white-space: pre-wrap;
+    padding: 0em 0.3em;
+}
+.num { text-align: right; }
+.mod, .ctr { text-align: center; }
+.cb {
+    border: 1px solid;
+    background-color: #FFFFFF;
+}
+.check { background-color: #808080; }
+/******************************************************************************/
+/******************************************************************************/
+.page {
+    position: relative;
+    margin: 0 auto;
+    width: 850px;
+    height: 1099px;
+    opacity: 1;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 5px 5px #808080;
+    background-color: #FFFFFF;
+    background: linear-gradient(45deg, #FFFFFF, #CCCCCC, #FFFFFF, #CCCCCC, #FFFFFF);
+    padding: 1.5% 2%;
+}
+/******************************************************************************/
+.h-pg, .name, .s-class, .misc { position: absolute; }
+.t-pg, .b-pg {
+    position: relative;
+    width: 100%;
+}
+.h-pg, .misc { background-color: #FFFFFF; }
+.t-pg {
+    top: 0%;
+    height: 11%;
+}
+.h-pg {
+    cursor: default;
+    top: 0%;
+    left: 9%;
+    width: 38%;
+    height: 25%;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB, 0px 0px 10px 10px #FFFFFF;
+    text-shadow: -1px -1px 0px #808080, 1px 1px 0px #EEEEEE;
+    padding: 0.1em;
+    text-align: center;
+    font-family: "Megrim", cursive;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #BBBBBB;
+}
+/**************************************/
+.name, .s-class {
+    top: 45%;
+    left: 4%;
+    width: 32%;
+    height: 40%;
+}
+.name .field, .s-class .field, .name label, .s-class label { position: absolute; }
+.name .field, .s-class .field {
+    width: 100%;
+    height: 75%;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+.name label, .s-class label {
+    bottom: 0%;
+    left: 25%;
+    width: 50%;
+    height: 25%;
+    border-radius: 0px 0px 10px 10px;
+}
+/**************************************/
+.misc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
+    bottom: 0%;
+    right: 0%;
+    width: 60%;
+    height: 85%;
+    border: 1px solid;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 2px #808080;
+}
+.b-pg {
+    margin: 2.5% 0% 0% 0%;
+    display: flex;
+    justify-content: space-between;
+    height: 86.5%;
+}
+.c-pg, .c2-pg {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    //background-color: #FFDDDD;
+}
+.c-pg { width: 32%; }
+.c2-pg { width: 66%; }
+/******************************************************************************/
+.class, .background, .player, .race, .alignment, .experience,
+.age, .height, .weight, .eyes, .skin, .hair {
+    width: 32%;
+    height: 45%;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px #808080;
+}
+.s-ability, .s-save, .s-attack,
+.p-hero, .p-faith, .p-reputation {
+    width: 25%;
+    height: 60%;
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px #808080;
+}
+.s-ability > .field, .s-save > .field, .s-attack > .field,
+.p-hero > .field, .p-faith > .field, .p-reputation > .field {
+    border-radius: 10px 10px 0px 0px;
+    font-size: 1.5em;
+}
+.s-ability label, .s-save label, .s-attack label,
+.p-hero label, .p-faith label, .p-reputation label { border-radius: 0px 0px 10px 10px; }
+.misc > div > .field { height: 75%; }
+.misc > div > label { height: 25%; }
+/******************************************************************************/
+/******************************************************************************/
+.sipss, .stats, .ipss, .inspiration, .prof-bonus, .sv, .sv > div, .sk, .sk > div, .pass-perc,
+.str, .dex, .con, .int, .wis, .cha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stats, .ipss, .sv, .sk, .str, .dex, .con, .int, .wis, .cha { flex-direction: column; }
+.stats, .ipss { height: 100%; }
+.sipss { height: 70%; }
+/**************************************/
+.stats {
+    justify-content: space-around;
+    width: 34%;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: inset 0px 3px 3px #808080;
+}
+.stats > div {
+    width: 80%;
+    height: 14%;
+}
+.stats label, .stats .field { box-shadow: 0px 3px 3px #808080; }
+.stats label, .stats .field:nth-child(2) { width: 100%; }
+.stats label {
+    height: 15%;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 10px 10px 0px 0px;
+}
+.stats .field:nth-child(2) {
+    height: 60%;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 1.8em;
+}
+.stats .field:nth-child(3) {
+    height: 25%;
+    width: 50%;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px 0px 10px 10px;
+    padding: 0em;
+    font-size: 1.2em;
+}
+/**************************************/
+.ipss { width: 63%; }
+.ipss > div { width: 100%; }
+/**************************************/
+.inspiration, .prof-bonus { height: 7%; }
+.inspiration > .field, .prof-bonus > .field, .pass-perc > .field {
+    height: 100%;
+    border-radius: 10px;
+    font-size: 1.4em;
+}
+.inspiration > .field, .prof-bonus > .field { width: 28%; }
+.inspiration > label, .prof-bonus > label, .pass-perc > label {
+    height: 60%;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0px 20px 20px 0px;
+    padding: 0.3em 0em;
+    font-size: 1em;
+}
+.inspiration > label, .prof-bonus > label { width: 72%; }
+/**************************************/
+.sv { height: 20%; }
+.sk { height: 62%; }
+.sv, .sk {
+    justify-content: space-around;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: inset 0px 2px 2px #808080;
+}
+.sv > div, .sk > div {
+    width: 95%;
+    border: 0px solid;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px #808080;
+}
+.sv > div { height: 13%; }
+.sk > div { height: 4.25%; }
+.sv > div > div, .sv > div > label, .sk > div > div, .sk > div > label { height: 100%; }
+.sv > div > .field:first-child, .sk > div > .field:first-child {
+    width: 10%;
+    border-width: 1px 0px 1px 1px;
+    border-radius: 10px 0px 0px 10px;
+}
+.sv > div > .field:nth-child(2), .sk > div > .field:nth-child(2) {
+    cursor: default;
+    width: 30%;
+    border-radius: 0px;
+    padding: 0em;
+    font-size: 1em;
+}
+.sv > div > label, .sk > div > label {
+    width: 60%;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0px 10px 10px 0px;
+    border-color: #000000;
+    padding: 0.15em 0.2em;
+    text-align: left;
+    color: #000000;
+}
+/**************************************/
+.pass-perc { height: 5%; }
+.pass-perc > .field { width: 18%; }
+.pass-perc > label { width: 82%; }
+/**************************************/
+.proficiencies { height: 23%; }
+.proficiencies .field { height: 94%; }
+.proficiencies label { height: 6%; }
+/******************************************************************************/
+.de, .hp-max, .ht-total, .ds-succ, .ds-fail, .at, .wpn-hd, .wpn,
+.eq, .money > div {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+.de, .ac label, .ac .field, .init label, .init .field, .spd label, .spd .field,
+.hp-max, .hp-cur, .hp-cur .field, .hp-cur label, .hp-tmp, .hp-tmp .field, .hp-tmp label,
+.ht-total, .ht-dice, .ht-dice .field, .ht-dice label,
+.ds-succ, .ds-fail, .ds > label, .ds > div > label, .ds > div > .field,
+.at, .wpn-hd, .wpn, .attacks, .attacks .field, .attacks label,
+.eq, .equip .field, .equip label { width: 100%; }
+.hp-max label, .hp-max .field, .ht-total label, .ht-total .field,
+.ds-succ label, .ds-succ .field, .ds-fail label, .ds-fail .field,
+.wpn-hd label, .wpn .field,
+.equip, .money .field, .money label { height: 100%; }
+/**************************************/
+.de {
+    height: 39%;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: inset 0 3px 3px #808080;
+    padding: 0.3em;
+}
+.ac, .init, .spd {
+    width: 30%;
+    height: 22%;
+}
+.ac {
+    border-radius: 5px 5px 40px 40px;
+    box-shadow: 0px 3px 3px #808080;
+}
+.ac .field {
+    height: 55%;
+    font-size: 1.6em;
+}
+.ac label {
+    height: 45%;
+    border-radius: 0px 0px 40px 40px;
+}
+.init, .spd {
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px #808080;
+}
+.init .field, .spd .field {
+    height: 82%;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 2em;
+}
+.init label, .spd label {
+    height: 18%;
+    border-radius: 0px 0px 10px 10px;
+}
+.hp {
+    width: 96%;
+    height: 48%;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px #808080;
+}
+.hp-max { height: 14%; }
+.hp-cur, .hp-tmp { height: 43%; }
+.hp-max label {
+    width: 40%;
+    border-width: 1px 0px 0px 1px;
+    border-radius: 5px 0px 0px 0px;
+    padding: 0.3em 0em;
+}
+.hp-max .field {
+    width: 60%;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 0px 5px 0px 0px;
+    padding: 0em;
+}
+.hp-cur .field, .hp-cur label, .hp-tmp .field { border-radius: 0px; }
+.hp-cur .field, .hp-tmp .field { height: 82%; }
+.hp-cur label, .hp-tmp label { height: 18%; }
+.hp-cur label { border-width: 0px 1px; }
+.ht, .ds {
+    width: 46%;
+    height: 20%;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px #808080;
+}
+.ht-total { height: 25%; }
+.ht-dice { height: 75%; }
+.ht-total label {
+    width: 33%;
+    border-width: 1px 0px 0px 1px;
+    border-radius: 5px 0px 0px 0px;
+}
+.ht-total .field {
+    width: 66%;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 0px 5px 0px 0px;
+    padding: 0em;
+    font-size: 0.9em;
+}
+.ht-dice .field {
+    height: 75%;
+    border-radius: 0px;
+    font-size: 1.2em;
+}
+.ht-dice label { height: 25%; }
+.ds-succ, .ds-fail { height: 40.5%; }
+.ds > label { height: 19%; }
+.ds > div > label {
+    width: 55%;
+    background-color: #FFFFFF;
+    padding: 0.5em 0em;
+    font-size: 0.8em;
+    color: #000000;
+}
+.ds > div > .field { width: 15%; }
+.ds > div > .field:nth-child(2), .ds > div > .field:nth-child(3), .ds-fail > .field:nth-child(4) { border-radius: 0px; }
+.ds-succ > label, .ds-succ > .field:nth-child(2), .ds-succ > .field:nth-child(3) { border-width: 1px 0px 0px 1px; }
+.ds-succ > label { border-radius: 5px 0px 0px 0px; }
+.ds-succ > .field:nth-child(4) {
+    border-width: 1px 1px 0px 1px;
+    border-radius: 0px 5px 0px 0px;
+}
+.ds-fail > label, .ds-fail > .field:nth-child(2), .ds-fail > .field:nth-child(3) { border-width: 1px 0px 1px 1px; }
+.ds-fail > label { border-radius: 0px; }
+.ds-fail > .field:nth-child(4) { border-width: 1px; }
+/**************************************/
+.at { height: 31%; }
+.wpn-hd > label:nth-child(2), .wpn > .field, .attacks .field { border-radius: 0px; }
+.wpn-hd > label:first-child, .wpn-hd > label:nth-child(2),
+.wpn > .field:first-child, .wpn > .field:nth-child(2) { border-width: 1px 0px 0px 1px; }
+.wpn-hd > label:nth-child(3), .wpn > .field:nth-child(3) { border-width: 1px 1px 0px 1px; }
+.wpn-hd > label:first-child, .wpn > .field:first-child { width: 52%; }
+.wpn-hd > label:nth-child(2), .wpn > .field:nth-child(2) { width: 16%; }
+.wpn-hd > label:nth-child(3), .wpn > .field:nth-child(3) { width: 32%; }
+.wpn > .field { padding: 0em 0.2em; }
+.wpn-hd { height: 5%; }
+.wpn-hd label:first-child { border-radius: 5px 0px 0px 0px; }
+.wpn-hd label:nth-child(3) { border-radius: 0px 5px 0px 0px; }
+.wpn { height: 7%; }
+.attacks { height: 66%; }
+.attacks .field { height: 93%; }
+.attacks label { height: 7%; }
+/**************************************/
+.eq {
+    height: 28%;
+    border-style: solid;
+    border-width: 0px 0px 1px 1px;
+    border-radius: 10px;
+    border-color: #B0B0B0;
+    justify-content: space-between;
+}
+.equip {
+    width: 80%;
+    order: 2;
+}
+.equip .field { height: 95%; }
+.equip label { height: 5%; }
+.money {
+    width: 20%;
+    height: 40%;
+    order: 1;
+}
+.money > div {
+    position: relative;
+    left: -25%;
+    width: 135%;
+    height: 20%;
+}
+.cp .field { border-width: 1px; }
+.cp label { border-width: 1px 1px 1px 0px; }
+.sp .field, .ep .field, .gp .field, .pp .field { border-width: 0px 1px 1px 1px; }
+.sp label, .ep label, .gp label, .pp label { border-width: 0px 1px 1px 0px; }
+.money .field, .money label { box-shadow: 0px 3px 3px #808080; }
+.money .field {
+    width: 75%;
+    border-radius: 10px 0px 0px 10px;
+    padding: 0em 0.2em;
+    font-size: 0.9em;
+}
+.money label {
+    width: 25%;
+    border-radius: 0px 10px 10px 0px;
+    padding: 0.3em 0em;
+}
+/******************************************************************************/
+.tr, .features, .features .field, .features label { width: 100%; }
+.tr {
+    height: 39%;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: inset 0px 2px 2px #808080;
+    padding: 0.5em;
+}
+.tr-personality, .tr-ideals, .tr-bonds, .tr-flaws {
+    height: 25%;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px #808080;
+}
+.tr-personality label, .tr-ideals label, .tr-bonds label {
+    border-width: 0px 1px;
+    border-radius: 0px;
+}
+.tr-ideals .field, .tr-bonds .field, .tr-flaws .field { border-radius: 0px; }
+.tr .field { height: 85%; }
+.tr label { height: 15%; }
+.features { height: 60%; }
+.features .field { height: 97.5%; }
+.features label { height: 2.5%; }
+/******************************************************************************/
+/******************************************************************************/
+.appearance, .appearance > div, .appearance img, .appearance label .backstory, .backstory .field, .backstory label,
+.allies .field, .allies label, .organization img,
+.add-feats, .add-feats .field, .add-feats label, .treasure, .treasure .field, .treasure label { width: 100%; }
+.appearance img, .allies, .organization img { height: 100%; }
+.appearance { height: 37%; }
+.appearance > div {
+    height: 96%;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+.appearance label { height: 4%; }
+.backstory { height: 62%; }
+.backstory .field { height: 97.75%; }
+.backstory label { height: 2.25%; }
+/******************************************************************************/
+.ao {
+    display: flex;
+    height: 37%;
+    border-style: solid;
+    border-width: 0px 1px 1px 0px;
+    border-radius: 10px;
+    border-color: #B0B0B0;
+}
+.allies { width: 55%; }
+.allies .field { height: 96.3%; }
+.allies label { height: 3.7%; }
+.organization {
+    width: 46%;
+    height: 82%;
+}
+.organization .field, .organization div:nth-child(2), .organization label {
+    position: relative;
+    left: -3%;
+    width: 103%;
+    box-shadow: 0px 3px 3px #808080;
+}
+.organization .field {
+    height: 7%;
+    border-radius: 5px 5px 0px 0px;
+    padding: 0em 0.2em;
+}
+.organization div:nth-child(2) {
+    height: 88%;
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px;
+    background-color: #FFFFFF;
+}
+.organization label {
+    height: 5%;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px 0px 5px 5px;
+}
+.organization img { border-radius: 0px 0px 5px 5px; }
+.add-feats { height: 35%; }
+.add-feats .field { height: 96%; }
+.add-feats label { height: 4%; }
+.treasure { height: 26%; }
+.treasure .field { height: 94.75%; }
+.treasure label { height: 5.25%; }
+/******************************************************************************/
+/******************************************************************************/
+.sp-total label, .sp-total .field, .sp-expend label, .sp-expend .field { width: 100%; }
+.sph > label, .sp-total, .sp-expend, .spell .field { height: 100%; }
+.sp0, .sp1, .sp2, .sp3, .sp4, .sp5, .sp6, .sp7, .sp8, .sp9 {
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 5px;
+    border-color: #B0B0B0;
+}
+.sp0, .sp5, .sp6, .sp7 { height: 26%; }
+.sp0 .sph, .sp5 .sph, .sp6 .sph, .sp7 .sph { height: 15.38%; }
+.sp0 .spl, .sp5 .spl, .sp6 .spl, .sp7 .spl { height: 84.62%; }
+.sp0 .spell, .sp5 .spell, .sp6 .spell, .sp7 .spell { height: 9.09%; }
+.sp1, .sp2, .sp3, .sp4 { height: 36%; }
+.sp1 .sph, .sp2 .sph, .sp3 .sph, .sp4 .sph { height: 11.11%; }
+.sp1 .spl, .sp2 .spl, .sp3 .spl, .sp4 .spl { height: 88.89%; }
+.sp1 .spell, .sp2 .spell, .sp3 .spell, .sp4 .spell { height: 6.26%; }
+.sp8, .sp9 { height: 22%; }
+.sp8 .sph, .sp9 .sph { height: 18.18%; }
+.sp8 .spl, .sp9 .spl { height: 81.82%; }
+.sp8 .spell, .sp9 .spell { height: 11.11%; }
+.sph { position: relative; }
+.sph > label, .sp-total, .sp-expend { position: absolute; }
+.sph > label {
+    padding: 0.1em 0em;
+    font-size: 1.8em;
+}
+.sph {
+    border: 0px solid rgba(128, 128, 128, 0);
+    border-radius: 20px 5px 5px 20px;
+    box-shadow: 0px 3px 3px #808080;
+    background-color: #808080;
+}
+.sph > label:first-child { box-shadow: 0px 3px 3px #808080; }
+.sph > label:first-child {
+    left: -5%;
+    width: 15%;
+    height: 100%;
+    border-style: solid;
+    border-width: 1px 0px 1px 1px;
+    border-radius: 20px 0px 0px 20px;
+}
+.sph > label:nth-child(2) {
+    right: 0%;
+    width: 90%;
+    border-width: 1px;
+    border-radius: 0px 5px 5px 0px;
+}
+.sp-total {
+    left: 10%;
+    width: 30%;
+}
+.sp-total label, .sp-expend label { height: 33%; }
+.sp-total label { border-width: 1px 1px 0px 1px; }
+.sp-total .field { border-width: 1px; }
+.sp-expend label { border-width: 1px 1px 0px 0px; }
+.sp-expend .field { border-width: 1px 1px 1px 0px; }
+.sp-total label, .sp-total .field { border-radius: 0px; }
+.sp-total .field, .sp-expend .field { height: 66%; }
+.sp-expend {
+    right: 0%;
+    width: 60%;
+}
+.sp-expend label { border-radius: 0px 5px 0px 0px; }
+.sp-expend .field { border-radius: 0px 0px 5px 0px; }
+.spell { display: flex; }
+.sp0 .spell { justify-content: center; }
+.sp1 .spell > .field:first-child, .sp2 .spell > .field:first-child, .sp3 .spell > .field:first-child,
+.sp4 .spell > .field:first-child, .sp5 .spell > .field:first-child, .sp6 .spell > .field:first-child,
+.sp7 .spell > .field:first-child, .sp8 .spell > .field:first-child, .sp9 .spell > .field:first-child {
+    width: 5%;
+    border-width: 0px 0px 1px 1px;
+    border-radius: 10px 0px 0px 10px;
+}
+.sp0 .spell > .field, .spell > .field:nth-child(2) {
+    width: 90%;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px;
+}
+.sp0 .spell:last-child .field { border-radius: 0px 0px 5px 5px; }
+.sp1 .spell:last-child .field:nth-child(2), .sp2 .spell:last-child .field:nth-child(2),
+.sp3 .spell:last-child .field:nth-child(2), .sp4 .spell:last-child .field:nth-child(2),
+.sp5 .spell:last-child .field:nth-child(2), .sp6 .spell:last-child .field:nth-child(2),
+.sp7 .spell:last-child .field:nth-child(2), .sp8 .spell:last-child .field:nth-child(2),
+.sp9 .spell:last-child .field:nth-child(2) { border-radius: 0px 0px 5px; }
+.spell .field {
+    padding: 0em .2em;
+}
+/******************************************************************************/
+.notes, .notes .field, .notes label
+.add-notes, .add-notes .field, .add-notes label { width: 100%; }
+.notes { height: 100%; }
+.notes .field { height: 98.5%; }
+.notes label { height: 1.5%; }
+.add-notes { height: 100%; }
+.add-notes .field { height: 98.5%; }
+.add-notes label { height: 1.5%; }
+/******************************************************************************/
+/******************************************************************************/
+/* A4 x 11.69" */
+@page {
+    size: A4 portrait;//landscape;
+    margin: 0in;
+    @top-left,
+    @top-right,
+    @bottom-left,
+    @bottom-right {
+        margin: 0in;
+        content: "";
+        font-size: 0pt;
+    }
+}
+@media print {
+    body, .page {
+        page-break-after: always;
+        border: none;
+        background: none;
+        background-color: #FFFFFF;
+        box-shadow: none;
+    }
+}
+/******************************************************************************/
+/******************************************************************************/
