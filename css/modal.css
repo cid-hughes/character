@@ -34,7 +34,7 @@
     padding: 0;
 }
 .default.modal > .box > .heading > .exit:hover {
-    box-shadow: inset 0px 2px 2px #BBBBFF, inset 0px -3px 3px #BBBBFF, 0px 0px 3px #8080FF;
+    box-shadow: inset 0px 2px 2px #BBBBFF, inset 0px -3px 3px #BBBBFF, 0px 0px 3px #8080FF, 0px 0px 10px #FFFFFF;
     background-color: #FFFFFF;
 }
 .default.modal > .box > .heading > .exit:active {
@@ -51,6 +51,7 @@
     text-align: center;
 }
 .default.modal > .box > .content input[type="file"],
+.default.model > .box > .content select,
 .default.modal > .box > .content button {
     margin: 0;
     background-color: #EEEEEE;
@@ -61,6 +62,11 @@
 .default.modal > .box > .content input[type="file"] {
     border: 0px solid;
     border-radius: 5px;
+}
+.default.model > .box > .content select {
+    border: 1px solid;
+    border-radius: 5px;
+    //box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB, 0px 0px 5px #808080;
 }
 .default.modal > .box > .content button {
     width: 60px;

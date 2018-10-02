@@ -53,6 +53,7 @@ Page.prototype.lblfld = function(className, label, fieldClasses) {
     root.appendChild(field);
     return { root: root, field: field };
 }
+/**************************************/
 Page.prototype.setTxtbxEvnt = function(field) {
     field.fontsize = field.style.fontSize;
     checkHeight(field);
@@ -120,17 +121,24 @@ Page.prototype.setNumEvnt = function(field) {
         checkHeight(e.target);
     });
 }
-Page.prototype.setImgEvnt = function(field, heading, content) {
+Page.prototype.setImgEvnt = function(field, heading, content, imgList) {
+    content = ['<p>',content,'</p><input type="file" accept=".jpg, .jpeg, .png"><select><option></option>'];
+    for (let label of Object.keys(imgList))
+        content.push(['<option value="',imgList[label],'">',label,'</option>'].join(""));
+    content.push("</select>");
     let imgSelect = new Modal({
         className: "default",
         heading: heading,
-        content: ['<p>',content,'</p><input type="file" accept=".jpg, .jpeg, .png">'].join("")
+        content: content.join("")
     });
     imgSelect.e.children[0].children[1].children[1].addEventListener("change", (img=>e=>{
         if (!e.target.files.length) return;
         let fr = new FileReader();
         fr.onload = e=>img.src = e.target.result;
         fr.readAsDataURL(e.target.files[0]);
+    })(field));
+    imgSelect.e.children[0].children[1].children[2].addEventListener("change", (img=>e=>{
+        img.src = e.target.value;
     })(field));
     field.parentNode.addEventListener("click", ()=>imgSelect.render());
 }
@@ -442,6 +450,38 @@ function DnD5ePage2() {
 }
 DnD5ePage2.prototype = Object.create(Page.prototype);
 DnD5ePage2.prototype.constructor = DnD5ePage2;
+DnD5ePage2.prototype.portaitList = {
+    "Aasimar":             "img/Aasimar.png",              "Augrek Brighthelm":   "img/Augrek_Brighthelm.png",
+    "Beldora":             "img/Beldora.png",              "Darathra Shendrel":   "img/Darathra_Shendrel.png",
+    "Darz Helgar":         "img/Darz_Helgar.png",          "Duvessa Shane":       "img/Duvessa_Shane.png",
+    "Fiona Gamwich":       "img/Fiona%20Gamwich.jpg",      "Firbolg":             "img/Firbolg.png",
+    "Ghelryn Foehammer":   "img/Ghelryn_Foehammer.png",    "Hobgoblin 1":         "img/Hobgoblin1.png",
+    "Hobgoblin 2":         "img/Hobgoblin2.png",           "Jaleh Mithrirmae":    "img/Jaleh%20Mithrirmae.jpg",
+    "Kazimil Paviyara":    "img/Kazimil%20Paviyara.png",   "Kenku":               "img/Kenku.png",
+    "Kissare Gadatas":     "img/Kissare%20Gadatas.jpg",    "Kobold 1":            "img/Kobold1.png",
+    "Kobold 2":            "img/Kobold2.png",              "Kobold 3":            "img/Kobold3.png",
+    "Krithra Gorunn":      "img/Krithra%20Gorunn.jpg",     "Lifferlas":           "img/Lifferlas.png",
+    "Lizardfolk":          "img/Lizardfolk.png",           "Markham Southwell":   "img/Markham_Southwell.png",
+    "Marro Calalando":     "img/Marro%20Calalando.jpg",    "Miros Xelbrin":       "img/Miros_Xelbrin.png",
+    "Narth Tezrin":        "img/Narth_Tezrin.png",         "Naxene Drathkala":    "img/Naxene_Drathkala.png",
+    "Nazanin Turani":      "img/Nazanin%20Turani.jpg",     "Neurion Silverfrond": "img/Neurion%20Silverfrond.jpg",
+    "Odran Swiftshield":   "img/Odran%20Swiftshield.jpg",  "Orc":                 "img/Orc.png",
+    "Oren Yogilvy":        "img/Oren_Yogilvy.png",         "Othovir":             "img/Othovir.png",
+    "Paeran Mithaviel":    "img/Paeran%20Mithaviel.jpg",   "Quickling":           "img/Quickling.png",
+    "Sarianna Ondaiseer":  "img/Sarianna%20Ondaiseer.jpg", "Shalvus Martholio":   "img/Shalvus_Martholio.png",
+    "Sir Baric Nylef":     "img/Sir_Baric_Nylef.png",      "Sirac of Suzail":     "img/Sirac_of_Suzail.png",
+    "Tabaxi":              "img/Tabaxi.png",               "Triton":              "img/Triton.png",
+    "Urgala Meltimer":     "img/Urgala_Meltimer.png",      "Yuan-ti":             "img/Yuan-ti.png",
+    "Zanna Raulnor":       "img/Zanna%20Raulnor.png",      "Zi Liang":            "img/Zi_Liang.png"
+};
+DnD5ePage2.prototype.factionList = {
+    "The Emerald Enclave":       "img/factions/The%20Emerald%20Enclave.png",
+    "The Harpers":               "img/factions/The%20Harpers.png",
+    "The Lords' Alliance":       "img/factions/The%20Lords'%20Alliance.png",
+    "The Order of the Gauntlet": "img/factions/The%20Order%20of%20the%20Gauntlet.png",
+    "The Raven Queen":           "img/factions/The%20Raven%20Queen.jpg",
+    "The Zhentarim":             "img/factions/The%20Zhentarim.png"
+};
 DnD5ePage2.prototype.imglbl = function(className, label) {
     let root = document.createElement("div");
     root.classList.add(className);
@@ -539,9 +579,9 @@ DnD5ePage2.prototype.render = function(insertBefore) {
     [ this.fields.name, this.fields.age, this.fields.height, this.fields.weight, this.fields.eyes,
         this.fields.skin, this.fields.hair, this.fields.organization.field ].forEach(this.setFldEvnt);
     /******************/
-    this.setImgEvnt(this.fields.appearance, "Character Appearance", "Choose a character appearance.");
+    this.setImgEvnt(this.fields.appearance, "Character Appearance", "Choose a character appearance.", this.portaitList);
     /******************/
-    this.setImgEvnt(this.fields.organization.img, "Organization Symbol", "Choose an organization symbol.");
+    this.setImgEvnt(this.fields.organization.img, "Organization Symbol", "Choose an organization symbol.", this.factionList);
 }
 /******************************************************************************/
 /******************************************************************************/
