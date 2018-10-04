@@ -488,36 +488,36 @@ function DnD5ePage2() {
 DnD5ePage2.prototype = Object.create(Page.prototype);
 DnD5ePage2.prototype.constructor = DnD5ePage2;
 DnD5ePage2.prototype.portaitList = {
-    "Aasimar":             "img/Aasimar.png",              "Augrek Brighthelm":   "img/Augrek_Brighthelm.png",
-    "Beldora":             "img/Beldora.png",              "Darathra Shendrel":   "img/Darathra_Shendrel.png",
-    "Darz Helgar":         "img/Darz_Helgar.png",          "Duvessa Shane":       "img/Duvessa_Shane.png",
-    "Fiona Gamwich":       "img/Fiona%20Gamwich.jpg",      "Firbolg":             "img/Firbolg.png",
-    "Ghelryn Foehammer":   "img/Ghelryn_Foehammer.png",    "Hobgoblin 1":         "img/Hobgoblin1.png",
-    "Hobgoblin 2":         "img/Hobgoblin2.png",           "Jaleh Mithrirmae":    "img/Jaleh%20Mithrirmae.jpg",
-    "Kazimil Paviyara":    "img/Kazimil%20Paviyara.png",   "Kenku":               "img/Kenku.png",
-    "Kissare Gadatas":     "img/Kissare%20Gadatas.jpg",    "Kobold 1":            "img/Kobold1.png",
-    "Kobold 2":            "img/Kobold2.png",              "Kobold 3":            "img/Kobold3.png",
-    "Krithra Gorunn":      "img/Krithra%20Gorunn.jpg",     "Lifferlas":           "img/Lifferlas.png",
-    "Lizardfolk":          "img/Lizardfolk.png",           "Markham Southwell":   "img/Markham_Southwell.png",
-    "Marro Calalando":     "img/Marro%20Calalando.jpg",    "Miros Xelbrin":       "img/Miros_Xelbrin.png",
-    "Narth Tezrin":        "img/Narth_Tezrin.png",         "Naxene Drathkala":    "img/Naxene_Drathkala.png",
-    "Nazanin Turani":      "img/Nazanin%20Turani.jpg",     "Neurion Silverfrond": "img/Neurion%20Silverfrond.jpg",
-    "Odran Swiftshield":   "img/Odran%20Swiftshield.jpg",  "Orc":                 "img/Orc.png",
-    "Oren Yogilvy":        "img/Oren_Yogilvy.png",         "Othovir":             "img/Othovir.png",
-    "Paeran Mithaviel":    "img/Paeran%20Mithaviel.jpg",   "Quickling":           "img/Quickling.png",
-    "Sarianna Ondaiseer":  "img/Sarianna%20Ondaiseer.jpg", "Shalvus Martholio":   "img/Shalvus_Martholio.png",
-    "Sir Baric Nylef":     "img/Sir_Baric_Nylef.png",      "Sirac of Suzail":     "img/Sirac_of_Suzail.png",
-    "Tabaxi":              "img/Tabaxi.png",               "Triton":              "img/Triton.png",
-    "Urgala Meltimer":     "img/Urgala_Meltimer.png",      "Yuan-ti":             "img/Yuan-ti.png",
-    "Zanna Raulnor":       "img/Zanna%20Raulnor.png",      "Zi Liang":            "img/Zi_Liang.png"
+    "Aasimar":             "img/aasimar.png",              "Augrek Brighthelm":   "img/augrek_brighthelm.png",
+    "Beldora":             "img/beldora.png",              "Darathra Shendrel":   "img/darathra_shendrel.png",
+    "Darz Helgar":         "img/darz_helgar.png",          "Duvessa Shane":       "img/duvessa_shane.png",
+    "Fiona Gamwich":       "img/fiona%20gamwich.jpg",      "Firbolg":             "img/firbolg.png",
+    "Ghelryn Foehammer":   "img/ghelryn_foehammer.png",    "Hobgoblin 1":         "img/hobgoblin1.png",
+    "Hobgoblin 2":         "img/hobgoblin2.png",           "Jaleh Mithrirmae":    "img/jaleh%20mithrirmae.jpg",
+    "Kazimil Paviyara":    "img/kazimil%20paviyara.png",   "Kenku":               "img/kenku.png",
+    "Kissare Gadatas":     "img/kissare%20gadatas.jpg",    "Kobold 1":            "img/kobold1.png",
+    "Kobold 2":            "img/kobold2.png",              "Kobold 3":            "img/kobold3.png",
+    "Krithra Gorunn":      "img/krithra%20gorunn.jpg",     "Lifferlas":           "img/lifferlas.png",
+    "Lizardfolk":          "img/lizardfolk.png",           "Markham Southwell":   "img/markham_southwell.png",
+    "Marro Calalando":     "img/marro%20calalando.jpg",    "Miros Xelbrin":       "img/miros_xelbrin.png",
+    "Narth Tezrin":        "img/narth_tezrin.png",         "Naxene Drathkala":    "img/naxene_drathkala.png",
+    "Nazanin Turani":      "img/nazanin%20turani.jpg",     "Neurion Silverfrond": "img/neurion%20silverfrond.jpg",
+    "Odran Swiftshield":   "img/odran%20swiftshield.jpg",  "Orc":                 "img/orc.png",
+    "Oren Yogilvy":        "img/oren_yogilvy.png",         "Othovir":             "img/othovir.png",
+    "Paeran Mithaviel":    "img/paeran%20mithaviel.jpg",   "Quickling":           "img/quickling.png",
+    "Sarianna Ondaiseer":  "img/sarianna%20ondaiseer.jpg", "Shalvus Martholio":   "img/shalvus_martholio.png",
+    "Sir Baric Nylef":     "img/sir_baric_nylef.png",      "Sirac of Suzail":     "img/sirac_of_suzail.png",
+    "Tabaxi":              "img/tabaxi.png",               "Triton":              "img/triton.png",
+    "Urgala Meltimer":     "img/urgala_meltimer.png",      "Yuan-ti":             "img/yuan-ti.png",
+    "Zanna Raulnor":       "img/zanna%20raulnor.png",      "Zi Liang":            "img/zi_liang.png"
 };
 DnD5ePage2.prototype.factionList = {
-    "The Emerald Enclave":       "img/factions/The%20Emerald%20Enclave.png",
-    "The Harpers":               "img/factions/The%20Harpers.png",
-    "The Lords' Alliance":       "img/factions/The%20Lords'%20Alliance.png",
-    "The Order of the Gauntlet": "img/factions/The%20Order%20of%20the%20Gauntlet.png",
-    "The Raven Queen":           "img/factions/The%20Raven%20Queen.jpg",
-    "The Zhentarim":             "img/factions/The%20Zhentarim.png"
+    "The Emerald Enclave":       "img/factions/the%20emerald%20enclave.png",
+    "The Harpers":               "img/factions/the%20harpers.png",
+    "The Lords' Alliance":       "img/factions/the%20lords'%20alliance.png",
+    "The Order of the Gauntlet": "img/factions/the%20order%20of%20the%20gauntlet.png",
+    "The Raven Queen":           "img/factions/the%20raven%20queen.jpg",
+    "The Zhentarim":             "img/factions/the%20zhentarim.png"
 };
 DnD5ePage2.prototype.imglbl = function(className, label) {
     let root = document.createElement("div");
