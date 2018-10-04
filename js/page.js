@@ -279,6 +279,29 @@ DnD5ePage1.prototype.import = function(obj) {
         }
     }
 }
+DnD5ePage1.prototype.clear = function() {
+    for (let n0 of Object.keys(this.fields)) {
+        if (n0 == "dthsv") {
+            for (let n1 of Object.keys(this.fields[n0]))
+                for (let n2 of this.fields[n0][n1])
+                    n2.classList.remove("check");
+            continue;
+        }
+        if (this.fields[n0].tagName) this.fields[n0].innerText = "";
+        else {
+            for (let n1 of Object.keys(this.fields[n0])) {
+                if (n1 == "checkbox") this.fields[n0][n1].classList.remove("check");
+                else if (n1 == "weapons") {
+                    for (let i=0; i<4; i++) {
+                        this.fields[n0][n1][i].name.innerText = "";
+                        this.fields[n0][n1][i].atk.innerText = "";
+                        this.fields[n0][n1][i].damage.innerText = "";
+                    }
+                } else this.fields[n0][n1].innerText = "";
+            }
+        }
+    }
+}
 /******************************************************************************/
 DnD5ePage1.prototype.render = function(insertBefore) {
     let field, roots = Object.create(null), params;
@@ -393,7 +416,7 @@ DnD5ePage1.prototype.render = function(insertBefore) {
         this.fields["tr-flaws"], this.fields.features, this.fields.attck.attacks ].forEach(this.setTxtbxEvnt);
     /******************/
     [ this.fields.name, this.fields.class, this.fields.background, this.fields.player,  this.fields.race,
-        this.fields["ht-dice"], this.fields["hp-max"], this.fields["ht-total"],
+        this.fields.ac, this.fields["ht-dice"], this.fields["hp-max"], this.fields["ht-total"],
         this.fields.attck.weapons[0].name, this.fields.attck.weapons[0].damage,
         this.fields.attck.weapons[1].name, this.fields.attck.weapons[1].damage,
         this.fields.attck.weapons[2].name, this.fields.attck.weapons[2].damage,
@@ -411,7 +434,7 @@ DnD5ePage1.prototype.render = function(insertBefore) {
         this.fields.attck.weapons[0].atk, this.fields.attck.weapons[1].atk,
         this.fields.attck.weapons[2].atk, this.fields.attck.weapons[3].atk ].forEach(this.setModEvnt);
     /******************/
-    [ this.fields.experience, this.fields.ac, this.fields.spd, this.fields.cp,
+    [ this.fields.experience, this.fields.spd, this.fields.cp,
         this.fields.sp, this.fields.ep, this.fields.gp, this.fields.pp ].forEach(this.setNumEvnt);
     /******************/
     [ { field: this.fields.alignment, list: [
@@ -545,6 +568,16 @@ DnD5ePage2.prototype.import = function(obj) {
             this.fields[n0].field.innerText = obj[n0].field;
             this.fields[n0].img.src = obj[n0].img;
             checkField(this.fields[n0].field);
+        }
+    }
+}
+DnD5ePage2.prototype.clear = function() {
+    for (let n0 of Object.keys(this.fields)) {
+        if (n0 == "appearance") this.fields[n0].src = "";
+        else if (this.fields[n0].tagName) this.fields[n0].innerText = "";
+        else {
+            this.fields[n0].field.innerText = "";
+            this.fields[n0].img.src = "";
         }
     }
 }
@@ -692,6 +725,22 @@ DnD5ePage3.prototype.import = function(obj) {
         }
     }
 }
+DnD5ePage3.prototype.clear = function() {
+    let i;
+    for (let n0 of Object.keys(this.fields)) {
+        if (this.fields[n0].tagName) this.fields[n0].innerText = "";
+        else {
+            if (n0 != "sp0") {
+                this.fields[n0].total.innerText = "";
+                this.fields[n0].expend.innerText = "";
+                for (i=0; i<this.fields[n0].selected.length; i++)
+                    this.fields[n0].selected[i].classList.remove("check");
+            }
+            for (i=0; i<this.fields[n0].spells.length; i++)
+                this.fields[n0].spells[i].innerText = "";
+        }
+    }
+}
 /******************************************************************************/
 DnD5ePage3.prototype.render = function(insertBefore) {
     let field, roots = Object.create(null), params;
@@ -765,7 +814,7 @@ DnD5ePage4.prototype = Object.create(Page.prototype);
 DnD5ePage4.prototype.constructor = DnD5ePage4;
 /******************************************************************************/
 DnD5ePage4.prototype.export = function() {
-    let obj = Object.create(null), i;
+    let obj = Object.create(null);
     for (let n0 of Object.keys(this.fields))
         obj[n0] = this.fields[n0].innerText;
     return obj;
@@ -775,6 +824,10 @@ DnD5ePage4.prototype.import = function(obj) {
         this.fields[n0].innerText = obj[n0];
         checkField(this.fields[n0]);
     }
+}
+DnD5ePage4.prototype.clear = function() {
+    for (let n0 of Object.keys(this.fields))
+        this.fields[n0].innerText = "";
 }
 /******************************************************************************/
 DnD5ePage4.prototype.render = function(insertBefore) {

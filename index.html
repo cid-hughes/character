@@ -53,6 +53,7 @@ body {
     box-shadow: inset 0px 3px 3px #AAAAAA, inset 0px -5px 5px #AAAAAA, 0px 0px 5px #444444;
     //text-shadow: -1px -1px 0px #808080, 1px 1px 0px #EEEEEE;
     overflow: hidden;
+    white-space: nowrap;
     padding: 3px 10px;
     text-align: center;
     font-family: Verdana, sans-serif;
@@ -154,6 +155,305 @@ page3 = new DnD5ePage3();
 page4 = new DnD5ePage4();
 /******************************************************************************/
 /******************************************************************************/
+saves = [];
+/******************************************************************************/
+saves.push([
+    {"name":"Fiona Gamwich","class":"Rogue 5","background":"Criminal","player":"Chris","race":"Lightfoot Halfling","alignment":"CN","experience":"6,500","inspiration":"0","prof-bonus":"+3","pass-perc":"14","proficiencies":`Languages:
+Common, Halfling
+
+Proficiencies:
+Light Armor, Simple Weapons, Crossbow, Hand Crossbow, Longsword, Rapier, Shortsword
+Disguise Kit: +6
+Forgery Kit: +3
+Thieves' Tools: +3
+Gaming (Dice): +3
+Gaming (Dragonchess): +3`,"ac":"13/15","init":"+3","spd":"25","hp-cur":"40","hp-tmp":"","ht-dice":"1d8","equip":"Pouch, Piton, Waterskin, Candle, Lantern (Hooded), Oil, Disguise Kit, Thieves' Tools, Rations, Rope (Hemp), String, Tinderbox, Hammer, Bell, Backpack, Ball Bearings, Clothes (Fine), Crowbar","cp":"50","sp":"30","ep":"13","gp":"25","pp":"10","tr-personality":`Flattery is my preferred trick for getting what I want.
+The first thing I do in a new place is note the locations of everything valuable-or where such things could be hidden.`,"tr-ideals":"Independence - I am a free spirit, no one tells me what to do.","tr-bonds":"I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.","tr-flaws":"I'm convinced that no one could ever fool me the way I fool others.","features":`Lightfoot Halfling:
+Small
+Lucky
+Brave
+Halfling Nimbleness
+Naturally Stealthy
+
+Rogue:
+Expertise: Deception, Persuation
+Sneak Attack 3d6
+Thieves' Cant
+Cunning Action
+Uncanny Dodge
+
+Mastermind:
+Master of Tactics
+Master of Intrigue
+
+Criminal:
+Specialty: Burglar
+Criminal Contact
+
+Feats:
+Master of Disguise
+
+Alias: Anariele Lanoscient`,"hp-max":"40","ht-total":"5d8","str":{"mod":"-1","ability":"8"},"dex":{"mod":"+3","ability":"16"},"con":{"mod":"0","ability":"10"},"int":{"mod":"+1","ability":"13"},"wis":{"mod":"+1","ability":"12"},"cha":{"mod":"+3","ability":"17"},"sv-str":{"checkbox":false,"mod":"-1"},"sv-dex":{"checkbox":true,"mod":"+6"},"sv-con":{"checkbox":false,"mod":"0"},"sv-int":{"checkbox":true,"mod":"+4"},"sv-wis":{"checkbox":false,"mod":"+1"},"sv-cha":{"checkbox":false,"mod":"+4"},"acro":{"checkbox":false,"mod":"+3"},"anim":{"checkbox":false,"mod":"+1"},"arca":{"checkbox":false,"mod":"+1"},"athl":{"checkbox":false,"mod":"-1"},"dece":{"checkbox":true,"mod":"+9"},"hist":{"checkbox":false,"mod":"+1"},"insi":{"checkbox":true,"mod":"+4"},"inti":{"checkbox":false,"mod":"+3"},"inve":{"checkbox":false,"mod":"+1"},"medi":{"checkbox":false,"mod":"+1"},"natu":{"checkbox":false,"mod":"+1"},"perc":{"checkbox":true,"mod":"+4"},"perf":{"checkbox":false,"mod":"+3"},"pers":{"checkbox":true,"mod":"+9"},"reli":{"checkbox":false,"mod":"+1"},"slei":{"checkbox":true,"mod":"+5"},"stea":{"checkbox":true,"mod":"+5"},"surv":{"checkbox":false,"mod":"+1"},"attck":{"weapons":[{"name":"Dagger","atk":"+6","damage":"1d4+3 P"},{"name":"H Crossbow","atk":"+6","damage":"1d6+3 P"},{"name":"S Sword","atk":"+6","damage":"1d6+3 P"},{"name":"","atk":"","damage":""}],"attacks":`
+Studded Leather Armor`}},
+/**************************************/
+    {"name":"Fiona Gamwich",
+"age":"22",
+"height":`2' 9"`,
+"weight":"37lbs",
+"eyes":"Blue",
+"skin":"Pale",
+"hair":"Blond, Shoulder-Length",
+"backstory":`  Orphaned at a young age and finding herself chafing under the stern but neglectful eyes of the orphanage Fiona escaped into the streets. There she honed her skill at pickpocketing in order to get by. The day to day was hard but livable but one day one of her marks noticed her and gave chase. She managed to blend into the crowd and escape but she heard him calling out that he would make her pay.
+  It turned out that he was connected enough to make good on his threat. Though she was never caught her description was passed to all the city guards within the city forcing her to lay low. With her supplies running low she knew she had to leave the city but even the gate guards were looking for her. She needed a disguise.
+  While running away from the gate guards she hid herself on a balcony where some clothing had been left out to dry. Among them were some child's clothes which she quickly put them on. It not only worked well enough to allow her to walk past the guards but a woman noticed her and after telling a story of being lost found herself in a home being fed and doted over.
+  She did leave her city the next day but already the experience had given her ideas. She practiced her new role as she traveled and by the time she made it to the next city she was ready. She found someone to take her in quickly enough and even tell her their intent to adopt her! She stayed long enough to case the house and then one night slipped away with as much as she could carry.
+  Its been years now and she has only gotten better. Currently she goes by the alias Anariele Lanoscient.`,
+"allies":`Follower of Leira`,
+"add-feats":`Encumbered: 40lbs
+Heavily Encumbered: 80lbs
+Carry Capacity: 120lbs
+Lift: 240lbs`,
+"treasure":`Amulet of Proof Against Detection & Location, Goggles of Night`,
+"appearance":"img/fiona%20gamwich.jpg",
+"organization":{"field":"The Lords' Alliance","img":"img/factions/the%20lords'%20alliance.png"}},
+/**************************************/
+    {"s-class":"","s-ability":"","s-save":"","s-attack":"","sp0":{"spells":["","","","","","","","","","",""]},"sp1":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp2":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp3":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp4":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp5":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp6":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp7":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp8":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]},"sp9":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]}},
+/**************************************/
+    {"name":"Fiona Gamwich","p-hero":"0","p-faith":"0","p-reputation":"0","notes":``,"add-notes":``}
+]);
+/******************************************************************************/
+saves.push([
+    {"name":"Kissare Gadatas","class":"Wizard 5","background":"Investigator","player":"Chris","race":"Human","alignment":"LN","experience":"6,500","inspiration":"0","prof-bonus":"+3","pass-perc":"20","proficiencies":`Languages:
+Common, Elvish, Dwarvish, Draconic
+
+Proficiencies:
+Dagger, Dart, Sling, Quarterstaff, Light Crossbow`,"ac":"12/15","init":"+2","spd":"30","hp-cur":"30","hp-tmp":"","ht-dice":"1d6","equip":"Uniform w/Rank, Pouch, Horn to Summon Help, Waterskin, Manacles, Orb, Bedroll, Rations, Rope (Hemp), Tinderbox, Mess Kit, Backpack, Spellbook, Torch","cp":"50","sp":"25","ep":"14","gp":"20","pp":"10","tr-personality":`I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.
+There's nothing I like more than a good mystery.`,"tr-ideals":"Logic - Emotions must not cloud our logical thinking.","tr-bonds":"I fight for those who cannot fight for themselves.","tr-flaws":"I'd rather eat my armor than admit when I'm wrong.","features":`Human:
+Chondathan
+
+Wizard:
+Spellbook
+Ritual Casting
+Arcane Recovery 3
+
+Divination:
+Divination Savant
+Portent: 2d6 - Long Rest
+
+Feats:
+Observant
+Investigator
+`,"hp-max":"30","ht-total":"5d6","str":{"mod":"-1","ability":"8"},"dex":{"mod":"+2","ability":"14"},"con":{"mod":"0","ability":"10"},"int":{"mod":"+4","ability":"18"},"wis":{"mod":"+2","ability":"14"},"cha":{"mod":"+1","ability":"12"},"sv-str":{"checkbox":false,"mod":"-1"},"sv-dex":{"checkbox":false,"mod":"+2"},"sv-con":{"checkbox":false,"mod":"0"},"sv-int":{"checkbox":true,"mod":"+7"},"sv-wis":{"checkbox":true,"mod":"+5"},"sv-cha":{"checkbox":false,"mod":"+1"},"acro":{"checkbox":false,"mod":"+2"},"anim":{"checkbox":false,"mod":"+2"},"arca":{"checkbox":true,"mod":"+7"},"athl":{"checkbox":false,"mod":"-1"},"dece":{"checkbox":false,"mod":"+1"},"hist":{"checkbox":true,"mod":"+7"},"insi":{"checkbox":true,"mod":"+5"},"inti":{"checkbox":false,"mod":"+1"},"inve":{"checkbox":true,"mod":"+10"},"medi":{"checkbox":false,"mod":"+2"},"natu":{"checkbox":false,"mod":"+4"},"perc":{"checkbox":true,"mod":"+5"},"perf":{"checkbox":false,"mod":"+1"},"pers":{"checkbox":false,"mod":"+1"},"reli":{"checkbox":false,"mod":"+4"},"slei":{"checkbox":false,"mod":"+2"},"stea":{"checkbox":false,"mod":"+2"},"surv":{"checkbox":false,"mod":"+2"},"attck":{"weapons":[{"name":"Frost Ray","atk":"+7","damage":"2d8 C"},{"name":"Dagger","atk":"+5","damage":"1d4+2 P"},{"name":"","atk":"","damage":""},{"name":"","atk":"","damage":""}],"attacks":`
+Mage Armor`}},
+/**************************************/
+    {"name":"Kissare Gadatas",
+"age":"20",
+"height":`5' 6"`,
+"weight":"130lbs",
+"eyes":"Brown",
+"skin":"Light Tan",
+"hair":"Light Brown, Short",
+"backstory":`  Kissare loves to hate not knowing. At a young age her inquisitive nature constantly got her into trouble until she came to the attention of local wizard who took her on as an apprentice.
+  Her need to know the unknown led her to become a diviner. Word of her skill and talent at divining quickly spread. It did not take long until the city guard came to recruit her.
+  As an investigator Kissare will stop at nothing to unravel any mystery which has been assigned to her. Sometimes she gets so caught up in pursuit of truth that she loses sight of the fact that people have been affected.`,
+"allies":`Follower of Savras`,
+"add-feats":`Encumbered: 40lbs
+Heavily Encumbered: 80lbs
+Carry Capacity: 120lbs
+Lift: 240lbs`,
+"treasure":`Rope of Entanglement`,
+"appearance":"img/kissare%20gadatas.jpg",
+"organization":{"field":"The Order of the Gauntlet","img":"img/factions/the%20order%20of%20the%20gauntlet.png"}},
+/**************************************/
+    {"s-class":"Wizard","s-ability":"INT","s-save":"15","s-attack":"+7","sp0":{"spells":["Light","Mage Hand","Minor Illusion","Ray of Frost","","","","","","",""]},"sp1":{"total":"4","expend":"","selected":[true,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false],"spells":["Detect Magic","Find Familiar","Identify","Mage Armor","Sleep","","","","","","","","","","",""]},"sp2":{"total":"3","expend":"","selected":[true,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["Detect Thoughts","Hold Person","Invisibility","Locate Object","Misty Step","","","","","","","","","","",""]},"sp3":{"total":"2","expend":"","selected":[true,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["Dispel Magic","Fly","Major Image","Tongues","","","","","","","","","","","",""]},"sp4":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp5":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp6":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp7":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp8":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]},"sp9":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]}},
+/**************************************/
+    {"name":"Kissare Gadatas","p-hero":"0","p-faith":"0","p-reputation":"0","notes":``,"add-notes":``}
+]);
+/******************************************************************************/
+saves.push([
+    {"name":"Odran Swiftshield","class":"Fighter 5","background":"Investigator","player":"Chris","race":"Warforged","alignment":"LN","experience":"6,500","inspiration":"0","prof-bonus":"+3","pass-perc":"14","proficiencies":`Language:
+Common, Draconic, Elvish, Dwarvish
+
+Proficiency:
+Light Armor, Medium Armor, Heavy Armor, Shields, Simple Weapons, Martial Weapons`,"ac":"19/21","init":"-1","spd":"30","hp-cur":"60","hp-tmp":"","ht-dice":"1d10","equip":"Uniform w/Rank, Pouch, Horn to Summon Help, Piton, Waterskin, Manacles, Rations, Rope (Hemp), Tinderbox, Hammer, Backpack, Crowbar, Torch","cp":"50","sp":"30","ep":"31","gp":"41","pp":"10","tr-personality":`I'm always polite and respectful.
+I face problems head-on. A simple, direct solution is the best path to success.`,"tr-ideals":"Responsibility - I do what I must and obey just authority.","tr-bonds":"My honor is my life.","tr-flaws":"I obey the law, even if the law causes misery.","features":`Warforged:
+Warforged Resilience
+Sentry's Rest
+Integrated Protection
+Iron Fists
+Powerful Build
+
+Fighter:
+Great Weapon Fighting
+Second Wind: 1d10+5
+Action Surge
+Extra Attack
+
+Eldritch Knight:
+Weapon Bond (Maul +2, Handaxe)
+
+Investigator:
+Watcher's Eye
+
+Feats:
+Heavy Armor Master`,"hp-max":"60","ht-total":"5d10","str":{"mod":"+4","ability":"18"},"dex":{"mod":"-1","ability":"8"},"con":{"mod":"+2","ability":"14"},"int":{"mod":"+2","ability":"14"},"wis":{"mod":"+1","ability":"12"},"cha":{"mod":"0","ability":"10"},"sv-str":{"checkbox":true,"mod":"+7"},"sv-dex":{"checkbox":false,"mod":"-1"},"sv-con":{"checkbox":true,"mod":"+5"},"sv-int":{"checkbox":false,"mod":"+2"},"sv-wis":{"checkbox":false,"mod":"+1"},"sv-cha":{"checkbox":false,"mod":"0"},"acro":{"checkbox":false,"mod":"-1"},"anim":{"checkbox":false,"mod":"+1"},"arca":{"checkbox":false,"mod":"+2"},"athl":{"checkbox":false,"mod":"+4"},"dece":{"checkbox":false,"mod":"0"},"hist":{"checkbox":false,"mod":"+2"},"insi":{"checkbox":true,"mod":"+4"},"inti":{"checkbox":true,"mod":"+3"},"inve":{"checkbox":true,"mod":"+5"},"medi":{"checkbox":false,"mod":"+1"},"natu":{"checkbox":false,"mod":"+2"},"perc":{"checkbox":true,"mod":"+4"},"perf":{"checkbox":false,"mod":"0"},"pers":{"checkbox":false,"mod":"0"},"reli":{"checkbox":false,"mod":"+2"},"slei":{"checkbox":false,"mod":"-1"},"stea":{"checkbox":false,"mod":"-1"},"surv":{"checkbox":false,"mod":"+1"},"attck":{"weapons":[{"name":"Maul +2","atk":"+9","damage":"2d6+6 B"},{"name":"L Sword","atk":"+7","damage":"1d8+4 S"},{"name":"L Sword 2H","atk":"+7","damage":"1d10+4 S"},{"name":"Warhammer","atk":"+7","damage":"1d8+4 B"}],"attacks":`Warhammer 2 +7 1d10+4 B
+Unarmed +7 1d4+4 B
+Handaxe x2 +7 1d6+4 S
+(20/60)
+
+Heavy Plating, Shield`}},
+/**************************************/
+    {"name":"Odran Swiftshield",
+"age":"26",
+"height":`6' 4"`,
+"weight":"320lbs",
+"eyes":"Blue",
+"skin":"N/A",
+"hair":"N/A",
+"backstory":`  The moment Odran was created he knew that order was important to him. He took up training as a fighter for the structure that would provide in his life. Becoming a city guard was a natural evolution of that path.
+  His talent with magic was as much a surprise to Odran as it was to anyone else. At first the chaos of magic and the distractions that it brought bothered Odran but over time and with much practice he found a way to merge it with his fighter training. He now uses it as a shield against the disruptive magic others might use against him.
+  Years of exemplary service led to Odran becoming an investigator.`,
+"allies":`Follower of Amaunator`,
+"add-feats":`Encumbered: 180lbs
+Heavily Encumbered: 360lbs
+Carry Capacity: 540lbs
+Lift: 1080lbs`,
+"treasure":``,
+"appearance":"img/odran%20swiftshield.jpg",
+"organization":{"field":"The Order of the Gauntlet","img":"img/factions/the%20order%20of%20the%20gauntlet.png"}},
+/**************************************/
+    {"s-class":"Eldritch Knight","s-ability":"INT","s-save":"13","s-attack":"+5","sp0":{"spells":["Green-Flame Blade","Light","","","","","","","","",""]},"sp1":{"total":"3","expend":"","selected":[true,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["Absorb Elements","Detect Magic","Magic Missile","Shield","","","","","","","","","","","",""]},"sp2":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp3":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp4":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp5":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp6":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp7":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp8":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]},"sp9":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]}},
+/**************************************/
+    {"name":"Odran Swiftshield","p-hero":"0","p-faith":"0","p-reputation":"0","notes":``,"add-notes":``}
+]);
+/******************************************************************************/
+saves.push([
+    {"name":"Sarianna Ondaiseer","class":"Rogue 5","background":"Noble","player":"Chris","race":"High Elf","alignment":"CN","experience":"6,500","inspiration":"0","prof-bonus":"+3","pass-perc":"14","proficiencies":`Languages:
+Common, Elvish, Draconic, Dwarvish
+
+Proficiencies:
+Light Armor, Simple Weapons, Longsword, Shortsword, Shortbow, Longbow, Crossbow, Hand Crossbow, Rapier
+Gaming (Dragonchess): +3
+Thieves' Tools: +3
+Disguise Kit: +3
+Poisoners' Kit: +3`,"ac":"17","init":"+4","spd":"30","hp-cur":"40","hp-tmp":"","ht-dice":"1d8","equip":"Scroll of Pedigree, Waterskin, Signet Ring, Bedroll, Thieves' Tools, Rations, Rope (Hemp), Tinderbox, Mess Kit, Backpack, Clothes (Fine), Torch, Purse","cp":"50","sp":"30","ep":"13","gp":"35","pp":"10","tr-personality":`My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.
+If you do me an injury, I will crush you, ruin your name, and salt your fields.`,"tr-ideals":"Independence - I  must prove that I  can handle myself without the coddling of my family.","tr-bonds":"My loyalty to my sovereign is unwavering.","tr-flaws":"I hide a truly scandalous secret that could ruin  my family forever.","features":`High Elf:
+Darkvision: 60'
+Keen Senses
+Fey Ancestry
+Trance
+
+Rogue:
+Expertise: Deception, Persuation
+Sneak Attack 3d6
+Thieves' Cant
+Cunning Action
+Uncanny Dodge
+
+Assassin:
+Assassinate
+
+Noble:
+Title:
+Position of Privilege`,"hp-max":"40","ht-total":"5d8","str":{"mod":"-1","ability":"8"},"dex":{"mod":"+4","ability":"18"},"con":{"mod":"0","ability":"10"},"int":{"mod":"+2","ability":"14"},"wis":{"mod":"+1","ability":"13"},"cha":{"mod":"+2","ability":"14"},"sv-str":{"checkbox":false,"mod":"-1"},"sv-dex":{"checkbox":true,"mod":"+7"},"sv-con":{"checkbox":false,"mod":"0"},"sv-int":{"checkbox":true,"mod":"+5"},"sv-wis":{"checkbox":false,"mod":"+1"},"sv-cha":{"checkbox":false,"mod":"+2"},"acro":{"checkbox":false,"mod":"+4"},"anim":{"checkbox":false,"mod":"+1"},"arca":{"checkbox":false,"mod":"+2"},"athl":{"checkbox":false,"mod":"-1"},"dece":{"checkbox":true,"mod":"+8"},"hist":{"checkbox":true,"mod":"+5"},"insi":{"checkbox":true,"mod":"+4"},"inti":{"checkbox":false,"mod":"+2"},"inve":{"checkbox":true,"mod":"+5"},"medi":{"checkbox":false,"mod":"+1"},"natu":{"checkbox":false,"mod":"+2"},"perc":{"checkbox":true,"mod":"+4"},"perf":{"checkbox":false,"mod":"+2"},"pers":{"checkbox":true,"mod":"+8"},"reli":{"checkbox":false,"mod":"+2"},"slei":{"checkbox":false,"mod":"+4"},"stea":{"checkbox":true,"mod":"+7"},"surv":{"checkbox":false,"mod":"+1"},"attck":{"weapons":[{"name":"Rapier","atk":"+7","damage":"1d8+4 P"},{"name":"Longbow","atk":"+7","damage":"1d8+4 P"},{"name":"Dagger x4","atk":"+7","damage":"1d4+4 P"},{"name":"","atk":"","damage":""}],"attacks":`
+Glamoured Studded Leather Armor`}},
+/**************************************/
+    {"name":"Sarianna Ondaiseer",
+"age":"21",
+"height":`5' 4"`,
+"weight":"100lbs",
+"eyes":"Violet",
+"skin":"Pale",
+"hair":"Golden, Long, Straight",
+"backstory":`  Sarianna lived the typical life of a noblewoman until the day she received a summons from her sovereign. He had a situation that needed to be dealt with discretely. None of his people could do it as their involvement would be noticed. He needed Sarianna.
+  As a noble she would be able to travel the country without suspicion and she was low enough in lineage that no would make note of her presence. He needed her to travel to another city. A noble who was selling information concerning troop movements would be there. Since he was noble it would be scandalous to arrest him so Sarianna's mission was to make him disappear.
+  Traveling to the inn was easy as was meeting the man in the hall and convincing him to speak with her privately in his room. Even killing him was quick and as luck would have it his luggage was similar to hers so she stuffed him in one of his bags and moved it to her room. The next morning Sarianna, her luggage, and the bag containing the traitor were on the road heading back to her home.
+  Since that day many other similar missions have come her way.  Although she has never gotten used to killing she cannot deny the thrill she gets from getting assignments, planning the missions, and manipulating people and events to allow her that time alone with her target. Sarianna would never admit this to anyone but she secretly looks forward to the next mission. Her only fear is that one day she will be caught in the act, mistaken for a common murderer, and bring shame to her family and sovereign.`,
+"allies":`Follower of Bhaal`,
+"add-feats":`Encumbered: 40lbs
+Heavily Encumbered: 80lbs
+Carry Capacity: 120lbs
+Lift: 240lbs`,
+"treasure":``,
+"appearance":"img/sarianna%20ondaiseer.jpg",
+"organization":{"field":"The Lords' Alliance","img":"img/factions/the%20lords'%20alliance.png"}},
+/**************************************/
+    {"s-class":"","s-ability":"","s-save":"","s-attack":"","sp0":{"spells":["Minor Illusion","","","","","","","","","",""]},"sp1":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp2":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp3":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp4":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp5":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp6":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp7":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp8":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]},"sp9":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]}},
+/**************************************/
+    {"name":"Sarianna Ondaiseer","p-hero":"0","p-faith":"0","p-reputation":"0","notes":``,"add-notes":``}
+]);
+/******************************************************************************/
+saves.push([
+    {"name":"Zanna Raulnor","class":"Rogue 5","background":"Entertainer","player":"Chris","race":"Forest Gnome","alignment":"NG","experience":"6,500","inspiration":"0","prof-bonus":"+3","pass-perc":"14","proficiencies":`Languages:
+Common, Gnommish
+
+Proficiencies:
+Light Armor, Simple Weapons, Hand Crossbow, Longsword, Rapier, Shortsword
+Thieves' Tools: +3 +5
+Disguise Kit: +3
+Instrument (Lute): +3`,"ac":"16","init":"+3","spd":"25","hp-cur":"40","hp-tmp":"","ht-dice":"1d8","equip":"Crystal, Lute, Backpack, Bedroll, Mess Kit, Waterskin, Soap, Costume x2, Clothes (Travel), Book of Lore, Scroll Case, Thieves' Tools, Trinket from an admire","cp":"50","sp":"30","ep":"13","gp":"35","pp":"10","tr-personality":`I'll settle for nothing less than perfection.
+I'm always polite and respectful. Mostly always.`,"tr-ideals":"Beauty - When I perform, I make the world better than it was.","tr-bonds":"My instrument is a family heirloom. It is my most treasured possession.","tr-flaws":"I have trouble keeping my true feelings hidden. I can't stay quiet when I see an injustice.","features":`Forest Gnome:
+Small
+Darkvision: 60'
+Gnome Cunning
+Natural Illusionist
+Speak with Small Beasts
+
+Rogue:
+Expertise: Slight of Hand, Performance
+Sneak Attack 3d6
+Thieves' Cant
+Cunning Action: Dash, Disengage, or Hide
+Uncanny Dodge
+
+Arcane Trickster:
+Spellcasting
+Mage Hand Legerdemain
+
+Entertainer:
+By Popular Demand`,"hp-max":"40","ht-total":"5d8","str":{"mod":"-1","ability":"8"},"dex":{"mod":"+3","ability":"16"},"con":{"mod":"0","ability":"10"},"int":{"mod":"+4","ability":"18"},"wis":{"mod":"+1","ability":"12"},"cha":{"mod":"+1","ability":"13"},"sv-str":{"checkbox":false,"mod":"0"},"sv-dex":{"checkbox":true,"mod":"+7"},"sv-con":{"checkbox":false,"mod":"+1"},"sv-int":{"checkbox":true,"mod":"+8"},"sv-wis":{"checkbox":false,"mod":"+2"},"sv-cha":{"checkbox":false,"mod":"+2"},"acro":{"checkbox":true,"mod":"+6"},"anim":{"checkbox":false,"mod":"+1"},"arca":{"checkbox":false,"mod":"+4"},"athl":{"checkbox":false,"mod":"-1"},"dece":{"checkbox":false,"mod":"+1"},"hist":{"checkbox":false,"mod":"+4"},"insi":{"checkbox":false,"mod":"+1"},"inti":{"checkbox":false,"mod":"+1"},"inve":{"checkbox":true,"mod":"+7"},"medi":{"checkbox":false,"mod":"+1"},"natu":{"checkbox":false,"mod":"+4"},"perc":{"checkbox":true,"mod":"+4"},"perf":{"checkbox":true,"mod":"+7"},"pers":{"checkbox":false,"mod":"+1"},"reli":{"checkbox":false,"mod":"+4"},"slei":{"checkbox":true,"mod":"+14"},"stea":{"checkbox":true,"mod":"+6"},"surv":{"checkbox":false,"mod":"+1"},"attck":{"weapons":[{"name":"Fire Bolt","atk":"+7","damage":"2d10 F"},{"name":"Rapier","atk":"+6","damage":"1d8+3 P"},{"name":"Dagger","atk":"+6","damage":"1d4+3 P"},{"name":"","atk":"","damage":""}],"attacks":`
+Studded Leather
+Cloak of Protection +1`}},
+/**************************************/
+    {"name":"Zanna Raulnor",
+"age":"18",
+"height":`3'2"`,
+"weight":"38lbs",
+"eyes":"Green",
+"skin":"Tan",
+"hair":"Light Blond, Long",
+"backstory":`  Zenna, born into a family of bards, has been surrounded by music her whole life. Even at an early age she yearned to follow her parents' footsteps. As soon as she could lift a lute she began playing. It soon became evident that she had real talent. Everything seemed to be falling into place for her to be the bard she dreamed of being until she tried singing.
+  No matter how hard she tried she could not sing in tune. Her dreams seemed to vanish before her eyes. She felt lost, unsure of her future. She felt she had no choice but to leave her village, despite leaving being almost unheard of, to find her new path.
+  She would travel town to town playing in inns to earn her keep. Eventually someone would request a sung balled. Embarrassed she would then move on to the next town. It was during one of her travels to a new town that she stumbled upon a caravan that had set up camp. She watched with rapt attention as one of the elders told ghost stories next to the campfire to the delight of the camp's children.
+  At her next stop she tried her own hand at story telling. She knew many ballads from her family so she tried simply telling the tale as a poem instead of singing, playing her lute as background music and even using her illusion magic to show scenes to the audience. Despite her delivery feeling a bit clumsy it was a resounding success!
+  Since then she has been refining her performance. She even mastered forming an ethereal magic hand to help, using it to play complicated pieces on her lute, to move things around the room, or even to startle an audience member. Her future seems to be coming back into focus. Now all she needs is to find new stories to tell!`,
+"allies":`Follower of Milil
+Nibbles, her weasel friend`,
+"add-feats":`Encumbered: 40lbs
+Heavily Encumbered: 80lbs
+Carry Capacity: 120lbs
+Lift: 240lbs
+`,
+"treasure":`Gloves of Thievery (+5 sleight of hand & pick locks)[DMG 172]
+Instrument of Illusions [XGE 137]`,
+"appearance":"img/zanna%20raulnor.png",
+"organization":{"field":"The Harpers","img":"img/factions/the%20harpers.png"}},
+/**************************************/
+    {"s-class":"Arcane Trickster","s-ability":"INT","s-save":"15","s-attack":"+7","sp0":{"spells":["Minor Illusion","Mage Hand","Fire Bolt","Prestidigitation","","","","","","",""]},"sp1":{"total":"3","expend":"","selected":[false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["Find Familiar","Silent Image","Sleep","Tasha's Hidious Laughter","","","","","","","","","","","",""]},"sp2":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp3":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp4":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","","","","","","",""]},"sp5":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp6":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp7":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","","","",""]},"sp8":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]},"sp9":{"total":"","expend":"","selected":[false,false,false,false,false,false,false,false,false],"spells":["","","","","","","","",""]}},
+/**************************************/
+    {"name":"Zanna Raulnor","p-hero":"0","p-faith":"0","p-reputation":"0","notes":`Gnome Cunning - You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.
+Speak w/Small Beasts - Through sounds and gestures, you can communicate simple ideas w/Small or smaller beasts.
+Uncanny Dodge - When an attacker that you can see hits you, use your reaction to halve the damage.
+Mage Hand Legerdemain - You can make Mage Hand invisible. You can stow or retrieve one object the hand is holding in a container worn or carried by target. You can use Thieves' Tools to pick a lock or disarm a trap at range. Succeed on a DEX (Slight of Hand) check vs target's WIS (Perception) check to not be noticed. You can use Cunning Action to control the hand.`,"add-notes":`WEASEL (Tiny celestial)
+AC 13 HP 1 (1d4-1) Spd 30'
+STR 3(-4) DEX 16(+3) CON 8(-1) INT 2(-4) WIS 12(+1) CHA 3(-4)
+SKILLS: Perception +3 Stealth +5
+PASSIVE PERCEPTION: 13
+KEEN HEARING AND SMELL: The weasel has advantage on Wisdom (Perception) checks that rely on hearing or smell.
+ACTIONS: Dash, Disengage, Dodge, Help, Hide, Ready, Search, & Use Object`}
+]);
+/******************************************************************************/
+/******************************************************************************/
 window.addEventListener("load", ()=>{
     let left = document.getElementById("left"), right = document.getElementById("right");
     page1.render(right);
@@ -161,6 +461,29 @@ window.addEventListener("load", ()=>{
     page3.render(right);
     page4.render(right);
 /******************************************************************************/
+    left.appendChild(document.createElement("div"));
+    left.lastChild.classList.add("button");
+    left.lastChild.innerText = "New Character";
+    left.firstChild.addEventListener("click", ()=>{
+        page1.clear();
+        page2.clear();
+        page3.clear();
+        page4.clear();
+    });
+    for (let save of saves) {
+        left.appendChild(document.createElement("div"));
+        left.lastChild.classList.add("button");
+        left.lastChild.innerText = save[0].name;
+        checkWidth(left.lastChild);
+        left.lastChild.addEventListener("click", ()=>{
+            page1.import(save[0]);
+            page2.import(save[1]);
+            page3.import(save[2]);
+            page4.import(save[3]);
+        });
+    }
+/******************************************************************************/
+/* Array.prototype.indexOf.call(e.target.parentNode.children, e.target); */
     for (let i=0; i<right.children.length; i++)
         right.children[i].addEventListener("click", (idx=>e=>{
             for (let i=0; i<4; i++)
@@ -172,14 +495,15 @@ window.addEventListener("load", ()=>{
   </script>
  </head>
  <body>
-  <div id="left">
-   <div class="button">New Character</div>
-  </div>
-  <div id="right">
-   <div class="button">Page 1</div>
-   <div class="button">Page 2</div>
-   <div class="button">Page 3</div>
-   <div class="button">Page 4</div>
-  </div>
+
+<div id="left"></div>
+
+<div id="right">
+ <div class="button">Page 1</div>
+ <div class="button">Page 2</div>
+ <div class="button">Page 3</div>
+ <div class="button">Page 4</div>
+</div>
+
  </body>
 </html>
