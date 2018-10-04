@@ -122,14 +122,10 @@ Page.prototype.setNumEvnt = function(field) {
     });
 }
 Page.prototype.setImgEvnt = function(field, heading, content, imgList) {
-    content = ['<p>',content,'</p><input type="file" accept=".jpg, .jpeg, .png"><select><option></option>'];
-    for (let label of Object.keys(imgList))
-        content.push(['<option value="',imgList[label],'">',label,'</option>'].join(""));
-    content.push("</select>");
     let imgSelect = new Modal({
         className: "default",
         heading: heading,
-        content: content.join("")
+        content: '<p>'+content+'</p><input type="file" accept=".jpg, .jpeg, .png"><div></div>'
     });
     imgSelect.e.children[0].children[1].children[1].addEventListener("change", (img=>e=>{
         if (!e.target.files.length) return;
@@ -137,10 +133,21 @@ Page.prototype.setImgEvnt = function(field, heading, content, imgList) {
         fr.onload = e=>img.src = e.target.result;
         fr.readAsDataURL(e.target.files[0]);
     })(field));
-    imgSelect.e.children[0].children[1].children[2].addEventListener("change", (img=>e=>{
-        img.src = e.target.value;
-    })(field));
+    let list = [];
+    for (let label of Object.keys(imgList))
+        list.push({ label: label, action: ((img, src)=>()=>img.src = src)(field, imgList[label]) });
+    this.setDrpdwnEvnt({ field: imgSelect.e.children[0].children[1].children[2], list: list });
+    field.addEventListener("load", ((field, list)=>e=>{
+        for (let label of Object.keys(list))
+            if (e.target.src.toLowerCase().indexOf(list[label].toLowerCase()) != -1) {
+                field.innerText = label;
+            }
+    })(imgSelect.e.children[0].children[1].children[2], imgList));
     field.parentNode.addEventListener("click", ()=>imgSelect.render());
+}
+Page.prototype.setDrpdwnEvnt = function(field) {
+    let drpdwn = new Drpdwn(field.list);
+    field.field.addEventListener("click", (drpdwn=>e=>drpdwn.down(e))(drpdwn));
 }
 /******************************************************************************/
 /******************************************************************************/
@@ -281,7 +288,7 @@ DnD5ePage1.prototype.render = function(insertBefore) {
         [ "race", "Race" ], [ "alignment", "Alignment", ["ctr"] ], [ "experience", "Experience", ["num"] ],
         [ "inspiration", "Inspiration", ["mod"] ], [ "prof-bonus", "Proficiency Bonus", ["mod"] ],
         [ "pass-perc", "Passive Perception", ["mod"] ], [ "proficiencies", "Proficiencies & Languages", ["txtbx"] ],
-        [ "ac", "Armor Class", ["mod"] ], [ "init", "Inititive", ["mod"] ], [ "spd", "Speed", ["mod"] ],
+        [ "init", "Inititive", ["mod"] ], [ "spd", "Speed", ["mod"] ],
         [ "hp-cur", "Current Hit Points", ["txtbx"] ], [ "hp-tmp", "Temporary Hit Points", ["txtbx"] ],
         [ "ht-dice", "Hit Dice", ["ctr"] ], [ "equip", "Equipment", ["txtbx"] ], [ "cp", "cp", ["num"] ],
         [ "sp", "sp", ["num"] ], [ "ep", "ep", ["num"] ], [ "gp", "gp", ["num"] ], [ "pp", "pp", ["num"] ],
@@ -296,7 +303,7 @@ DnD5ePage1.prototype.render = function(insertBefore) {
     }
     /******************/
     for (params of [
-        [ "hp-max", "Hit Point Maximum", ["ctr"] ], [ "ht-total", "Total", ["ctr"] ]
+        [ "ac", "Armor Class", ["mod"] ], [ "hp-max", "Hit Point Maximum", ["ctr"] ], [ "ht-total", "Total", ["ctr"] ]
     ]) {
         if (params[2]) field = this.lblfld(params[0], params[1], params[2]);
         else field = this.fldlbl(params[0], params[1]);
@@ -385,7 +392,7 @@ DnD5ePage1.prototype.render = function(insertBefore) {
         this.fields["tr-flaws"], this.fields.features, this.fields.attck.attacks ].forEach(this.setTxtbxEvnt);
     /******************/
     [ this.fields.name, this.fields.class, this.fields.background, this.fields.player,  this.fields.race,
-        this.fields.alignment, this.fields["ht-dice"], this.fields["hp-max"], this.fields["ht-total"],
+        this.fields["ht-dice"], this.fields["hp-max"], this.fields["ht-total"],
         this.fields.attck.weapons[0].name, this.fields.attck.weapons[0].damage,
         this.fields.attck.weapons[1].name, this.fields.attck.weapons[1].damage,
         this.fields.attck.weapons[2].name, this.fields.attck.weapons[2].damage,
@@ -405,6 +412,12 @@ DnD5ePage1.prototype.render = function(insertBefore) {
     /******************/
     [ this.fields.experience, this.fields.ac, this.fields.spd, this.fields.cp,
         this.fields.sp, this.fields.ep, this.fields.gp, this.fields.pp ].forEach(this.setNumEvnt);
+    /******************/
+    [ { field: this.fields.alignment, list: [
+        { label: "LG" }, { label: "NG" }, { label: "CG" },
+        { label: "LN" }, { label:  "N" }, { label: "CN" },
+        { label: "LE" }, { label: "NE" }, { label: "CE" }
+    ] } ].forEach(this.setDrpdwnEvnt);
     /******************/
     for (field of [ this.fields.str.ability, this.fields.dex.ability, this.fields.con.ability,
         this.fields.int.ability, this.fields.wis.ability, this.fields.cha.ability ]) {

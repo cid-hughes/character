@@ -313,12 +313,14 @@ label {
     box-shadow: 0px 3px 3px #808080;
 }
 .ac .field {
-    height: 55%;
-    font-size: 1.6em;
+    height: 82%;
+    border-radius: 0px 0px 40px 40px;
+    font-size: 2em;
 }
 .ac label {
-    height: 45%;
-    border-radius: 0px 0px 40px 40px;
+    height: 18%;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 5px 5px 0px 0px;
 }
 .init, .spd {
     border-radius: 10px;
@@ -366,7 +368,7 @@ label {
 .ht-total { height: 25%; }
 .ht-dice { height: 75%; }
 .ht-total label {
-    width: 33%;
+    width: 34%;
     border-width: 1px 0px 0px 1px;
     border-radius: 5px 0px 0px 0px;
 }

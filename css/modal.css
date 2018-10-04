@@ -68,6 +68,15 @@
     border-radius: 5px;
     //box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB, 0px 0px 5px #808080;
 }
+.default.modal > .box > .content > div:nth-child(3) {
+    position: relative;
+    width: 150px;
+    height: 1.3em;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 0px 2px;
+}
 .default.modal > .box > .content button {
     width: 60px;
     border: 1px solid #000000;
