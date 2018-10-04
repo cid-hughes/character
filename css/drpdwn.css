@@ -98,9 +98,26 @@
     background-color: #FFFFFF;
     overflow: auto;
 }
-.default.modal > .box > .content > div:nth-child(3) > .drpdwn > div {
-
-}
 .default.modal > .box > .content > div:nth-child(3) > .drpdwn > div:hover {
+    background-color: #EEEEEE;
+}
+/**************************************/
+.organization > .field {
+    overflow: visible;
+}
+.organization > .field > .drpdwn {
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    z-index: 100;
+    width: 100%;
+    max-height: 300px;
+    border: 1px solid;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0px 5px 5px #808080;
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+.organization > .field > .drpdwn > div:hover {
     background-color: #EEEEEE;
 }

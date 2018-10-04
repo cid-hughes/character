@@ -522,21 +522,22 @@ label {
 .allies label { height: 3.7%; }
 .organization {
     width: 46%;
-    height: 82%;
+    height: 83%;
 }
-.organization .field, .organization div:nth-child(2), .organization label {
+.organization > .field, .organization > div:nth-child(2), .organization > label {
     position: relative;
     left: -3%;
     width: 103%;
     box-shadow: 0px 3px 3px #808080;
 }
 .organization .field {
-    height: 7%;
+    position: relative;
+    height: 8%;
     border-radius: 5px 5px 0px 0px;
     padding: 0em 0.2em;
 }
-.organization div:nth-child(2) {
-    height: 88%;
+.organization > div:nth-child(2) {
+    height: 87%;
     border-style: solid;
     border-width: 0px 1px 1px 1px;
     border-radius: 0px;

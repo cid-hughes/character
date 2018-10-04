@@ -140,13 +140,14 @@ Page.prototype.setImgEvnt = function(field, heading, content, imgList) {
     field.addEventListener("load", ((field, list)=>e=>{
         for (let label of Object.keys(list))
             if (e.target.src.toLowerCase().indexOf(list[label].toLowerCase()) != -1) {
-                field.innerText = label;
+                while (field.childNodes.length>0) field.removeChild(field.childNodes[0]);
+                field.appendChild(document.createTextNode(label));
             }
     })(imgSelect.e.children[0].children[1].children[2], imgList));
     field.parentNode.addEventListener("click", ()=>imgSelect.render());
 }
 Page.prototype.setDrpdwnEvnt = function(field) {
-    let drpdwn = new Drpdwn(field.list);
+    let drpdwn = field.options ? new Drpdwn(field.list, field.options) : new Drpdwn(field.list);
     field.field.addEventListener("click", (drpdwn=>e=>drpdwn.down(e))(drpdwn));
 }
 /******************************************************************************/
@@ -590,7 +591,12 @@ DnD5ePage2.prototype.render = function(insertBefore) {
         this.fields.treasure ].forEach(this.setTxtbxEvnt);
     /******************/
     [ this.fields.name, this.fields.age, this.fields.height, this.fields.weight, this.fields.eyes,
-        this.fields.skin, this.fields.hair, this.fields.organization.field ].forEach(this.setFldEvnt);
+        this.fields.skin, this.fields.hair ].forEach(this.setFldEvnt);
+    /******************/
+    [ { field: this.fields.organization.field, list: [
+        { label: "The Emerald Enclave" }, { label: "The Harpers" }, { label: "The Lords' Alliance" },
+        { label: "The Order of the Gauntlet" }, { label:  "The Raven Queen" }, { label: "The Zhentarim" }
+    ], options: { editable: true } } ].forEach(this.setDrpdwnEvnt);
     /******************/
     this.setImgEvnt(this.fields.appearance, "Character Appearance", "Choose a character appearance.", this.portaitList);
     /******************/

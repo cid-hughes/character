@@ -67,6 +67,7 @@ Drpdwn.prototype.close = function(e) {
         this.root.onmouseover = "";
     }
     this.root.removeChild(this.list);
+    window.getSelection().removeAllRanges();
     clearTimeout(this._to);
     this.isDown = false;
 }
