@@ -722,6 +722,8 @@ DropdownImageField.prototype.getValue = function() {
 /**************************************/
 DropdownImageField.prototype.setValue = function(value) {
     if (value.value !== undefined) {
+        if (!this.fontSize)
+            this.fontSize = this.field.field.style.fontSize || this.defaultFontSize;
         this.field.field.innerText = value.value;
         if (this.afterEdit)
             this.afterEdit(value.value);

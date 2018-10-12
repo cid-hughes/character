@@ -280,6 +280,8 @@ BasicField.prototype.getValue = function() {
 }
 /**************************************/
 BasicField.prototype.setValue = function(value) {
+    if (!this.fontSize)
+        this.fontSize = this.field.style.fontSize || this.defaultFontSize;
     this.field.innerText = value;
     if (this.afterEdit)
         this.afterEdit(value);
@@ -305,7 +307,7 @@ BasicField.prototype.render = function() {
 /******************************************************************************/
 function TextboxField(options) {
     BasicField.call(this, Object.assign({
-        afterEdit: v=>{ this.field.innerText = v; this.checkWidth();
+        afterEdit: v=>{ this.checkHeight();
     } }, options));
     this.field.classList.add("txtbx");
     this.field.style.whiteSpace = "pre-wrap";
@@ -506,6 +508,8 @@ DropdownField.prototype.stopEdit = function(obj, li) {
 }
 /**************************************/
 DropdownField.prototype.setValue = function(value) {
+    if (!this.fontSize)
+        this.fontSize = this.field.style.fontSize || this.defaultFontSize;
     this.value = value;
     let keys = Object.keys(this.lookup);
     if (keys.length > 0)
