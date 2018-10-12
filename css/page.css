@@ -37,6 +37,9 @@ label {
     font-family: 'Annie Use Your Telescope', cursive;
     font-size: 1em;
 }
+.editable.field {
+    background-color: #FFDDDD;
+}
 .txtbx {
     white-space: pre-wrap;
     padding: 0em 0.3em;
@@ -144,7 +147,7 @@ label {
 .c2-pg { width: 66%; }
 /******************************************************************************/
 .class, .background, .player, .race, .alignment, .experience,
-.age, .height, .weight, .eyes, .skin, .hair {
+.gender, .age, .htwt, .height, .weight, .eyes, .skin, .hair {
     width: 32%;
     height: 45%;
     border-radius: 5px;
@@ -237,34 +240,46 @@ label {
     border: 1px solid;
     border-radius: 5px;
     background-color: #FFFFFF;
-    box-shadow: inset 0px 2px 2px #808080;
+    //box-shadow: inset 0px 2px 2px #808080;
 }
 .sv > div, .sk > div {
     width: 95%;
-    border: 0px solid;
+    border: 1px solid;
     border-radius: 10px;
-    box-shadow: 0px 2px 2px #808080;
+    //box-shadow: 0px 2px 2px #808080;
+    overflow: hidden;
 }
 .sv > div { height: 13%; }
 .sk > div { height: 4.25%; }
 .sv > div > div, .sv > div > label, .sk > div > div, .sk > div > label { height: 100%; }
+
 .sv > div > .field:first-child, .sk > div > .field:first-child {
     width: 10%;
-    border-width: 1px 0px 1px 1px;
+    border-width: 0px;//1px 0px 1px 1px;
     border-radius: 10px 0px 0px 10px;
+    box-shadow: inset 0px 1px 1px #BBBBBB, inset 0px -3px 3px #BBBBBB;
+}
+.sv > div > .check.field:first-child, .sk > div > .check.field:first-child {
+    box-shadow: inset 0px 1px 1px #444444, inset 0px -3px 3px #444444;
 }
 .sv > div > .field:nth-child(2), .sk > div > .field:nth-child(2) {
     cursor: default;
+    position: relative;
+    top: -10%;
+    height: 120%;
     width: 30%;
+    border-width: 0px 1px 0px 1px;
     border-radius: 0px;
+    box-shadow: inset 0px 4px 2px #BBBBBB, inset 0px -3px 3px #BBBBBB;
     padding: 0em;
     font-size: 1em;
 }
 .sv > div > label, .sk > div > label {
     width: 60%;
-    border-width: 1px 1px 1px 0px;
+    border-width: 0px;//1px 1px 1px 0px;
     border-radius: 0px 10px 10px 0px;
     border-color: #000000;
+    box-shadow: inset 0px 1px 1px #BBBBBB, inset 0px -3px 3px #BBBBBB;
     padding: 0.15em 0.2em;
     text-align: left;
     color: #000000;
@@ -491,20 +506,115 @@ label {
 .features label { height: 2.5%; }
 /******************************************************************************/
 /******************************************************************************/
-.appearance, .appearance > div, .appearance img, .appearance label .backstory, .backstory .field, .backstory label,
-.allies .field, .allies label, .organization img,
+.appearance, .appearance > div, .appearance label .backstory, .backstory .field, .backstory label,
+.allies .field, .allies label,
 .add-feats, .add-feats .field, .add-feats label, .treasure, .treasure .field, .treasure label { width: 100%; }
-.appearance img, .allies, .organization img { height: 100%; }
+.allies { height: 100%; }
 .appearance { height: 37%; }
-.appearance > div {
+.appearance > div,
+.appearance > .field {
     height: 96%;
     width: 100%;
     border: 1px solid;
     border-radius: 5px 5px 0px 0px;
     background-color: #FFFFFF;
+    padding: 0px;
     overflow: hidden;
+    text-align: center;
+}
+.alignment {
+    position: relative;
+    padding: 0px;
+}
+.alignment .drpdwn {
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    top: 0%;
+    left: 0%;
+    z-index: 100;
+    width: 100%;
+    height: 200%;
+    border: 0px solid;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px #808080;
+    background-color: #FFFFFF;
+    //background-color: rgba(255,255,255,0.75);
+}
+.alignment .drpdwn > div {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    text-align: center;
+    padding: 0.3em;
+    font-family: 'Annie Use Your Telescope', cursive;
+    font-size: 1em;
+}
+.alignment .drpdwn > div:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    border-width: 1px;
+    border-radius: 5px 0px 0px 0px;
+}
+.alignment .drpdwn > div:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0px;
+}
+.alignment .drpdwn > div:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0px 5px 0px 0px;
+}
+.alignment .drpdwn > div:nth-child(4) {
+    grid-column: 1;
+    grid-row: 2;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px;
+}
+.alignment .drpdwn > div:nth-child(5) {
+    grid-column: 2;
+    grid-row: 2;
+    border-width: 0px 1px 1px 0px;
+    border-radius: 0px;
+}
+.alignment .drpdwn > div:nth-child(6) {
+    grid-column: 3;
+    grid-row: 2;
+    border-width: 0px 1px 1px 0px;
+    border-radius: 0px;
+}
+.alignment .drpdwn > div:nth-child(7) {
+    grid-column: 1;
+    grid-row: 3;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px 0px 0px 5px;
+}
+.alignment .drpdwn > div:nth-child(8) {
+    grid-column: 2;
+    grid-row: 3;
+    border-width: 0px 1px 1px 0px;
+    border-radius: 0px;
+}
+.alignment .drpdwn > div:nth-child(9) {
+    grid-column: 3;
+    grid-row: 3;
+    border-width: 0px 1px 1px 0px;
+    border-radius: 0px 0px 5px 0px;
+}
+.alignment .drpdwn > div:hover {
+    background-color: #EEEEEE;
 }
 .appearance label { height: 4%; }
+.appearance > div > img,
+.organization > div > img {
+    max-width: 100%;
+    max-height: 100%;
+}
 .backstory { height: 62%; }
 .backstory .field { height: 97.75%; }
 .backstory label { height: 2.25%; }
@@ -530,13 +640,14 @@ label {
     width: 103%;
     box-shadow: 0px 3px 3px #808080;
 }
-.organization .field {
+.organization .field,
+.organization > .field:first-child {
     position: relative;
     height: 8%;
     border-radius: 5px 5px 0px 0px;
     padding: 0em 0.2em;
 }
-.organization > div:nth-child(2) {
+.organization > .field:nth-child(2) {
     height: 87%;
     border-style: solid;
     border-width: 0px 1px 1px 1px;
@@ -548,7 +659,23 @@ label {
     border-width: 0px 1px 1px 1px;
     border-radius: 0px 0px 5px 5px;
 }
-.organization img { border-radius: 0px 0px 5px 5px; }
+.organization > .field:nth-child(2) > img { border-radius: 0px 0px 5px 5px; }
+.organization > .drpdwn {
+    position: absolute;
+    top: 8%;
+    left: -3%;
+    z-index: 100;
+    width: 103%;
+    max-height: 300px;
+    border: 1px solid;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0px 5px 5px #808080;
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+.organization > .drpdwn > div:hover {
+    background-color: #EEEEEE;
+}
 .add-feats { height: 35%; }
 .add-feats .field { height: 96%; }
 .add-feats label { height: 4%; }
@@ -583,13 +710,15 @@ label {
     padding: 0.1em 0em;
     font-size: 1.8em;
 }
+.sph > div > label {
+    //box-shadow: inset 0px 3px 3px #BBBBBB;
+}
 .sph {
     border: 0px solid rgba(128, 128, 128, 0);
     border-radius: 20px 5px 5px 20px;
     box-shadow: 0px 3px 3px #808080;
     background-color: #808080;
 }
-.sph > label:first-child { box-shadow: 0px 3px 3px #808080; }
 .sph > label:first-child {
     left: -5%;
     width: 15%;
@@ -597,12 +726,15 @@ label {
     border-style: solid;
     border-width: 1px 0px 1px 1px;
     border-radius: 20px 0px 0px 20px;
+    //box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB, 0px 3px 3px #808080;
+    box-shadow: 0px 3px 3px #808080;
 }
 .sph > label:nth-child(2) {
     right: 0%;
     width: 90%;
     border-width: 1px;
     border-radius: 0px 5px 5px 0px;
+    //box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB;
 }
 .sp-total {
     left: 10%;
@@ -629,11 +761,18 @@ label {
     width: 5%;
     border-width: 0px 0px 1px 1px;
     border-radius: 10px 0px 0px 10px;
+    box-shadow: inset 0px 1px 1px #BBBBBB, inset 0px -3px 3px #BBBBBB;
+}
+.sp1 .spell > .check.field:first-child, .sp2 .spell > .check.field:first-child, .sp3 .spell > .check.field:first-child,
+.sp4 .spell > .check.field:first-child, .sp5 .spell > .check.field:first-child, .sp6 .spell > .check.field:first-child,
+.sp7 .spell > .check.field:first-child, .sp8 .spell > .check.field:first-child, .sp9 .spell > .check.field:first-child {
+    box-shadow: inset 0px 1px 1px #444444, inset 0px -3px 3px #444444;
 }
 .sp0 .spell > .field, .spell > .field:nth-child(2) {
     width: 90%;
     border-width: 0px 1px 1px 1px;
     border-radius: 0px;
+    box-shadow: inset 0px 1px 1px #BBBBBB, inset 0px -3px 3px #BBBBBB;
 }
 .sp0 .spell:last-child .field { border-radius: 0px 0px 5px 5px; }
 .sp1 .spell:last-child .field:nth-child(2), .sp2 .spell:last-child .field:nth-child(2),

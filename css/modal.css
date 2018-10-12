@@ -92,6 +92,130 @@
     background-color: #DDDDDD;
 }
 /**************************************/
+.imgmodal.modal {
+    background-color: #808080;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.imgmodal.modal > .box {
+    margin: 10% auto;
+    width: 300px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #EEEEEE;
+    box-shadow: 0px 5px 5px #444444;
+}
+.imgmodal.modal > .box > .heading {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: #B0B0B0;
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: inset 0px 3px 3px #BBBBFF, inset 0px -5px 5px #BBBBFF;
+    background-color: #DDDDFF;
+    padding: 2px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-size: 1.2em;
+    font-width: bold;
+}
+.imgmodal.modal > .box > .heading > .exit {
+    margin: 1px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: #DDDDFF;
+    background-color: rgba(221, 221, 255, 0);
+    padding: 0;
+}
+.imgmodal.modal > .box > .heading > .exit:hover {
+    box-shadow: inset 0px 2px 2px #BBBBFF, inset 0px -3px 3px #BBBBFF, 0px 0px 3px #8080FF, 0px 0px 10px #FFFFFF;
+    background-color: #FFFFFF;
+}
+.imgmodal.modal > .box > .heading > .exit:active {
+    box-shadow: inset 0px 2px 2px #BBBBFF, inset 0px -3px 3px #BBBBFF, 0px 0px 3px #8080FF;
+    background-color: #CCCCFF;
+}
+.imgmodal.modal > .box > .content {
+    padding: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+}
+.imgmodal.modal > .box > .content > .actions {
+    margin: 20px 0 5px 0;
+    text-align: center;
+}
+.imgmodal.modal > .box > .content input[type="file"],
+.imgmodal.modal > .box > .content button {
+    margin: 0;
+    background-color: #EEEEEE;
+    padding: 2px;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+}
+.imgmodal.modal > .box > .content input[type="file"] {
+    border: 0px solid;
+    border-radius: 5px;
+}
+.imgmodal.modal > .box > .content > .imgdrpdwn {
+    position: relative;
+    display: flex;
+    width: 250px;
+    height: 20px;
+    border: 0px solid;
+    border-radius: 5px;
+}
+.imgmodal.modal > .box > .content > .imgdrpdwn > label {
+    width: 50px;
+    height: 20px;
+    border-style: solid;
+    border-width: 1px 0px 1px 1px;
+    border-radius: 5px 0px 0px 5px;
+    border-color: #808080;
+    background-color: #DDDDDD;
+    padding: 1px 2px;
+    text-align: right;
+    font-size: 1em;
+    color: #808080;
+}
+.imgmodal.modal > .box > .content > .imgdrpdwn > .field {
+    width: 200px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 0px 5px 5px 0px;
+    background-color: #FFFFFF;
+    padding: 1px 2px;
+    font-size: 1em;
+}
+.imgmodal.modal > .box > .content > .imgdrpdwn > .drpdwn {
+    top: 100%;
+    left: 50px;
+    width: 200px;
+    max-height: 300px;
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px 5px 5px 5px;
+    background-color: #FFFFFF;
+    overflow: auto;
+    padding: 0px 2px;
+}
+.imgmodal.modal > .box > .content > .imgdrpdwn > .drpdwn > div:hover {
+    background-color: #EEEEEE;
+}
+.imgmodal.modal > .box > .content button {
+    width: 60px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow: inset 0px 3px 3px #BBBBBB, inset 0px -5px 5px #BBBBBB, 0px 0px 5px #808080;
+    text-align: center;
+    font-weight: bold;
+}
+.imgmodal.modal > .box > .content button:hover {
+    background-color: #FFFFFF;
+}
+.imgmodal.modal > .box > .content button:active {
+    background-color: #DDDDDD;
+}
+/**************************************/
 .blank.modal {
     background-color: rgba(255, 255, 255, 0.5);
 }
