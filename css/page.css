@@ -512,7 +512,8 @@ label {
 .allies { height: 100%; }
 .appearance { height: 37%; }
 .appearance > div,
-.appearance > .field {
+.appearance > .field,
+.organization > .field {
     height: 96%;
     width: 100%;
     border: 1px solid;

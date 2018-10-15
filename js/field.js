@@ -282,6 +282,7 @@ BasicField.prototype.getValue = function() {
 BasicField.prototype.setValue = function(value) {
     if (!this.fontSize)
         this.fontSize = this.field.style.fontSize || this.defaultFontSize;
+    this.field.style.fontSize = this.fontSize;
     this.field.innerText = value;
     if (this.afterEdit)
         this.afterEdit(value);
@@ -462,6 +463,7 @@ DropdownField.prototype.createList = function(list) {
             this.lookup[item.label] = item.value;
     }
 }
+/**************************************/
 DropdownField.prototype.startEdit = function(obj) {
     if (obj.isEditing) return;
     if (obj.readOnly && obj.parent) {
@@ -510,6 +512,7 @@ DropdownField.prototype.stopEdit = function(obj, li) {
 DropdownField.prototype.setValue = function(value) {
     if (!this.fontSize)
         this.fontSize = this.field.style.fontSize || this.defaultFontSize;
+    this.field.style.fontSize = this.fontSize;
     this.value = value;
     let keys = Object.keys(this.lookup);
     if (keys.length > 0)

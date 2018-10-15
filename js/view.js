@@ -6,24 +6,24 @@ view.left = Object.create(null);
 view.left.root = document.createElement("div");
 view.left.root.id = "left";
 /******************/
-view.left.root.appendChild(document.createElement("div"));
-view.left.root.lastChild.classList.add("button");
-view.left.root.lastChild.innerText = "New Character";
-view.left.root.lastChild.addEventListener("click", ()=>{
-    view.page.forEach(p=>p.clear());
-});
-/******************/
-/* character load button code goes here */
-saves.forEach((s,i)=>{
+view.left.list = function(list) {
+    view.left.root.innerHTML = "";
     view.left.root.appendChild(document.createElement("div"));
     view.left.root.lastChild.classList.add("button");
-    view.left.root.lastChild.innerText = s.name;
-    checkWidth(view.left.root.lastChild);
-    view.left.root.lastChild.addEventListener("click", (save=>()=>{
-        view.page.forEach(p=>p.setValues(save));
-    })(s));
-});
-/* character load button code goes here */
+    view.left.root.lastChild.innerText = "New Character";
+    view.left.root.lastChild.addEventListener("click", ()=>{
+        view.page.forEach(p=>p.clear());
+    });
+/********/
+    list.sort().forEach(li=>{
+        view.left.root.appendChild(document.createElement("div"));
+        view.left.root.lastChild.classList.add("button");
+        view.left.root.lastChild.innerText = li.name;
+        view.left.root.lastChild.addEventListener("click", (id=>()=>{
+            controller.load(id);
+        })(li.id));
+    });
+}
 /******************************************************************************/
 view.right = Object.create(null);
 /**************************************/
@@ -49,21 +49,36 @@ view.panel.root.classList.add("panel");
 view.panel.root.appendChild(document.createElement("div"));
 view.panel.root.lastChild.classList.add("save");
 view.panel.root.lastChild.innerText = "save";
-//view.panel.root.lastChild.addEventListener("click", ()=>{});
+view.panel.root.lastChild.addEventListener("click", ()=>{
+    controller.save();
+});
 /**************************************/
 view.panel.root.appendChild(document.createElement("div"));
 view.panel.root.lastChild.classList.add("delete");
 view.panel.root.lastChild.innerText = "delete";
+view.panel.root.lastChild.addEventListener("click", ()=>{
+    localStorage.clear();
+    model.data.init();
+    controller.list();
+});
+/**************************************/
+//view.panel.root.appendChild(document.createElement("div"));
+//view.panel.root.lastChild.classList.add("options");
+//view.panel.root.lastChild.innerText = "options";
 //view.panel.root.lastChild.addEventListener("click", ()=>{});
+/******************************************************************************/
+view.modal = Object.create(null);
+/**************************************/
+//view.modal.[modal] = new Modal({});
 /******************************************************************************/
 view.page = [];
 /**************************************/
-[   { name: "name", label: "Character Name" },
-    { name: "name", label: "Character Name" },
-    { name: "s-class", label: "Spellcasting Class" },
-    { name: "name", label: "Character Name" }
+[   { name: "name", label: "Character Name", fontSize: "1.2em" },
+    { name: "name", label: "Character Name", fontSize: "1.2em" },
+    { name: "s-class", label: "Spellcasting Class", fontSize: "1.2em" },
+    { name: "name", label: "Character Name", fontSize: "1.2em" }
 ].forEach((f,i)=>{
-    view.page[i] = new Page({ name: "page" + (i + 1) });
+    view.page[i] = new Page({ name: "page" + (i + 1), handler: (f,v)=>controller.handleUpdate(f,v) });
     view.page[i].addContainer(new Container({ name: "t-pg" }));
     view.page[i].lastElement.addHTML(document.createElement("div"));
     view.page[i].lastElement.lastElement.classList.add("h-pg");
@@ -130,24 +145,24 @@ for (let field of [
 ]) view.page[0].lastElement.lastElement.lastElement.lastElement.lastElement.addField(new CheckboxModField(field).changeOrder());
 view.page[0].lastElement.lastElement.lastElement.lastElement.addContainer(new Container({ name: "sk" }));
 for (let field of [
-    { name: "acro", label: "Acrobatics" },
-    { name: "anim", label: "Animal Handling" },
-    { name: "arca", label: "Arcana" },
-    { name: "athl", label: "Athletics" },
-    { name: "dece", label: "Deception" },
-    { name: "hist", label: "History" },
-    { name: "insi", label: "Insight" },
-    { name: "inti", label: "Intimidate" },
-    { name: "inve", label: "Investigation" },
-    { name: "medi", label: "Medicine" },
-    { name: "natu", label: "Nature" },
-    { name: "perc", label: "Perception" },
-    { name: "perf", label: "Performance" },
-    { name: "pers", label: "Persuasion" },
-    { name: "reli", label: "Religion" },
-    { name: "slei", label: "Sleight of Hand" },
-    { name: "stea", label: "Stealth" },
-    { name: "surv", label: "Survival" }
+    { name: "acro", label: "Acrobatics", canDouble: true },
+    { name: "anim", label: "Animal Handling", canDouble: true },
+    { name: "arca", label: "Arcana", canDouble: true },
+    { name: "athl", label: "Athletics", canDouble: true },
+    { name: "dece", label: "Deception", canDouble: true },
+    { name: "hist", label: "History", canDouble: true },
+    { name: "insi", label: "Insight", canDouble: true },
+    { name: "inti", label: "Intimidate", canDouble: true },
+    { name: "inve", label: "Investigation", canDouble: true },
+    { name: "medi", label: "Medicine", canDouble: true },
+    { name: "natu", label: "Nature", canDouble: true },
+    { name: "perc", label: "Perception", canDouble: true },
+    { name: "perf", label: "Performance", canDouble: true },
+    { name: "pers", label: "Persuasion", canDouble: true },
+    { name: "reli", label: "Religion", canDouble: true },
+    { name: "slei", label: "Sleight of Hand", canDouble: true },
+    { name: "stea", label: "Stealth", canDouble: true },
+    { name: "surv", label: "Survival", canDouble: true }
 ]) view.page[0].lastElement.lastElement.lastElement.lastElement.lastElement.addField(new CheckboxModField(field).changeOrder());
 view.page[0].lastElement.lastElement.addField(new StatField({ name: "pass-perc", label: "Passive Perception", fontSize: "1.4em" }).changeOrder());
 view.page[0].lastElement.lastElement.addField(new TextboxField({ name: "proficiencies", label: "Proficiencies & Languages" }).changeOrder());
@@ -218,8 +233,7 @@ for (let field of [
 /**************************************/
 view.page[2].addContainer(new Container({ name: "b-pg" }));
 for (let column of [
-    [
-        { name: "sp0", label: "0", spells: 11, isCantrip: true },
+    [   { name: "sp0", label: "0", spells: 11, isCantrip: true },
         { name: "sp1", label: "1", spells: 16 },
         { name: "sp2", label: "2", spells: 16 }
     ], [
@@ -249,6 +263,9 @@ view.page[3].lastElement.lastElement.addField(new TextboxField({ name: "add-note
 window.addEventListener("load", ()=>{
 /******************************************************************************/
     document.body.appendChild(view.left.root);
+/**************************************/
+    for (let element of view.left.root.children)
+        checkWidth(element);
 /******************************************************************************/
     document.body.appendChild(view.panel.root);
 /**************************************/

@@ -1,8 +1,8 @@
 function ModField(options) {
     options = Object.assign({
-        beforeEdit: v=>{ this.field.innerText = v.replace(/[^0-9-]/g, ""); },
+        beforeEdit: v=>{ this.field.innerText = String(v).replace(/[^0-9-]/g, ""); },
         afterEdit: v=>{
-            v = v.replace(/[^0-9-]/g, "");
+            v = String(v).replace(/[^0-9-]/g, "");
             this.field.innerText = (v.length && v.indexOf("-") == -1 ? "+" : "") + v;
         }
     }, options);
@@ -14,9 +14,9 @@ ModField.prototype.constructor = ModField;
 /******************************************************************************/
 function NumberField(options) {
     options = Object.assign({
-        beforeEdit: v=>{ this.field.innerText = v.replace(/\D/g, ""); },
+        beforeEdit: v=>{ this.field.innerText = String(v).replace(/\D/g, ""); },
         afterEdit: v=>{
-            this.field.innerText = this.field.innerText.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            this.field.innerText = String(v).replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             this.checkWidth();
         }
     }, options);
@@ -28,8 +28,8 @@ NumberField.prototype.constructor = NumberField;
 /******************************************************************************/
 function StatField(options) {
     options = Object.assign({
-        beforeEdit: v=>{ this.field.innerText = v.replace(/[^0-9\/]/g, ""); },
-        afterEdit: v=>{ this.field.innerText = v.replace(/[^0-9\/]/g, ""); this.checkWidth(); }
+        beforeEdit: v=>{ this.field.innerText = String(v).replace(/[^0-9\/]/g, ""); },
+        afterEdit: v=>{ this.field.innerText = String(v).replace(/[^0-9\/]/g, ""); this.checkWidth(); }
     }, options);
     BasicField.call(this, options);
     this.field.classList.add("ctr");
@@ -39,12 +39,12 @@ StatField.prototype.constructor = StatField;
 /******************************************************************************/
 function StatModField(options) {
     options = Object.assign({
-        beforeEdit: v=>{ this.field.stat.innerText = v.replace(/[^0-9\/]/g, ""); },
-        afterEdit: v=>{ this.field.stat.innerText = v.replace(/[^0-9\/]/g, ""); this.checkWidth(); },
+        beforeEdit: v=>{ this.field.stat.innerText = String(v).replace(/[^0-9\/]/g, ""); },
+        afterEdit: v=>{ this.field.stat.innerText = String(v).replace(/[^0-9\/]/g, ""); this.checkWidth(); },
         modClasses: [],
-        modBeforeEdit: v=>{ this.field.mod.innerText = v.replace(/[^0-9-]/g, ""); },
+        modBeforeEdit: v=>{ this.field.mod.innerText = String(v).replace(/[^0-9-]/g, ""); },
         modAfterEdit: v=>{
-            v = v.replace(/[^0-9-]/g, "");
+            v = String(v).replace(/[^0-9-]/g, "");
             this.field.mod.innerText = (v.length && v.indexOf("-") == -1 ? "+" : "") + v;
         }
     }, options);
@@ -106,6 +106,10 @@ StatModField.prototype.checkWidth = function() {
         this.field.stat.style.fontSize = (font[1]-= 0.01) + font[2];
 }
 /**************************************/
+StatModField.prototype.getValue = function() {
+    return this.value;
+}
+/**************************************/
 StatModField.prototype.setValue = function(value) {
     if (value.stat !== undefined) {
         value.stat = value.stat.replace(/^\s+|\s+$/g, "");
@@ -137,12 +141,13 @@ function CheckboxModField(options) {
         parent: "",
         readOnly: false,
         label: "Field Label",
-        beforeEdit: v=>{ this.field.mod.innerText = v.replace(/[^0-9-]/g, ""); },
+        beforeEdit: v=>{ this.field.mod.innerText = String(v).replace(/[^0-9-]/g, ""); },
         afterEdit: v=>{
-            v = v.replace(/[^0-9-]/g, "");
+            v = String(v).replace(/[^0-9-]/g, "");
             this.field.mod.innerText = (v.length && v.indexOf("-") == -1 ? "+" : "") + v;
         },
-        fontSize: "1em"
+        fontSize: "1em",
+        canDouble: false
     }, options);
 /******************/
     this.name = options.name;
@@ -154,6 +159,7 @@ function CheckboxModField(options) {
     this.beforeEdit = options.beforeEdit;
     this.afterEdit = options.afterEdit;
     this.isEditing = false;
+    this.canDouble = options.canDouble;
 /******************/
     this.root = document.createElement("div");
     this.root.classList.add(this.name);
@@ -190,8 +196,25 @@ CheckboxModField.prototype.setClasses = function(classes) {
 /**************************************/
 CheckboxModField.prototype.toggleState = function(obj) {
     let previousValue = obj.value.chkbx;
-    obj.field.chkbx.classList.toggle("check");
-    obj.value.chkbx = obj.field.chkbx.classList.contains("check");
+    if (this.canDouble) {
+        switch(obj.value.chkbx) {
+            case false:
+                obj.field.chkbx.classList.add("check");
+                obj.value.chkbx = true;
+                break;
+            case true:
+                obj.field.chkbx.classList.add("check");
+                obj.value.chkbx = 2;
+                break;
+            case 2:
+                obj.field.chkbx.classList.remove("check");
+                obj.value.chkbx = false;
+                break;
+        }
+    } else {
+        obj.field.chkbx.classList.toggle("check");
+        obj.value.chkbx = obj.field.chkbx.classList.contains("check");
+    }
     if (previousValue != obj.value.chkbx && obj.parent)
         obj.parent.updatedField(obj.name, obj.value);
 }
@@ -256,7 +279,7 @@ CheckboxModField.prototype.getValue = function() {
 CheckboxModField.prototype.setValue = function(value) {
     if (value.chkbx !== undefined) {
         if (value.chkbx) {
-            this.value.chkbx = true;
+            this.value.chkbx = value.chkbx;
             this.field.chkbx.classList.add("check");
         } else {
             this.value.chkbx = false;
@@ -724,6 +747,7 @@ DropdownImageField.prototype.setValue = function(value) {
     if (value.value !== undefined) {
         if (!this.fontSize)
             this.fontSize = this.field.field.style.fontSize || this.defaultFontSize;
+        this.field.field.style.fontSize = this.fontSize;
         this.field.field.innerText = value.value;
         if (this.afterEdit)
             this.afterEdit(value.value);
