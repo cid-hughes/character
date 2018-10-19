@@ -147,7 +147,8 @@ function CheckboxModField(options) {
             this.field.mod.innerText = (v.length && v.indexOf("-") == -1 ? "+" : "") + v;
         },
         fontSize: "1em",
-        canDouble: false
+        canDouble: false,
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
@@ -155,7 +156,10 @@ function CheckboxModField(options) {
     this.readOnly = options.readOnly;
     this.defaultFontSize = options.fontSize;
     this.fontSize = "";
-    this.value = { chkbx: false, mod: "" };
+    this.update = options.update;
+    this.cur = Object.create(null);
+    this.cur.mod = this.cur.pb = this.cur.adj = 0;
+    this.value = { chkbx: 0, mod: "" };
     this.beforeEdit = options.beforeEdit;
     this.afterEdit = options.afterEdit;
     this.isEditing = false;
@@ -198,23 +202,24 @@ CheckboxModField.prototype.toggleState = function(obj) {
     let previousValue = obj.value.chkbx;
     if (this.canDouble) {
         switch(obj.value.chkbx) {
-            case false:
+            case 0:
                 obj.field.chkbx.classList.add("check");
-                obj.value.chkbx = true;
+                obj.value.chkbx = 1;
                 break;
-            case true:
+            case 1:
                 obj.field.chkbx.classList.add("check");
                 obj.value.chkbx = 2;
                 break;
             case 2:
                 obj.field.chkbx.classList.remove("check");
-                obj.value.chkbx = false;
+                obj.value.chkbx = 0;
                 break;
         }
     } else {
         obj.field.chkbx.classList.toggle("check");
-        obj.value.chkbx = obj.field.chkbx.classList.contains("check");
+        obj.value.chkbx = obj.field.chkbx.classList.contains("check")?1:0;
     }
+    obj.setValue({ mod: obj.cur.mod + obj.cur.adj + obj.cur.pb * obj.value.chkbx });
     if (previousValue != obj.value.chkbx && obj.parent)
         obj.parent.updatedField(obj.name, obj.value);
 }
@@ -278,20 +283,48 @@ CheckboxModField.prototype.getValue = function() {
 /**************************************/
 CheckboxModField.prototype.setValue = function(value) {
     if (value.chkbx !== undefined) {
-        if (value.chkbx) {
-            this.value.chkbx = value.chkbx;
+        if (value.chkbx)
             this.field.chkbx.classList.add("check");
-        } else {
-            this.value.chkbx = false;
-            this.field.chkbx.classList.remove("check");
-        }
+        else this.field.chkbx.classList.remove("check");
+        this.value.chkbx = value.chkbx;
+        value.mod = this.cur.mod + this.cur.adj + this.cur.pb * this.value.chkbx;
     }
     if (value.mod !== undefined) {
+        if (value.mod === "")
+            this.cur.adj = 0;
+        else this.cur.adj = parseInt(value.mod) - (this.cur.mod + this.cur.pb * this.value.chkbx);
         this.field.mod.innerText = value.mod;
         if (this.afterEdit)
             this.afterEdit(value.mod);
         this.value.mod = this.field.mod.innerText;
+        this.cur.adj = parseInt(this.value.mod) - (this.cur.mod + this.cur.pb * this.value.chkbx);
+    }
+    return this;
+}
+/**************************************/
+CheckboxModField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+CheckboxModField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
+    else if (this.update) {
+        switch(fieldName) {
+            case this.update:
+                if (this.cur.mod !== value.mod)
+                    this.cur.mod = parseInt(value.mod);
+                break;
+            case "prof-bonus":
+                if (this.cur.pb !== value)
+                    this.cur.pb = parseInt(value);
+                break;
+            default:
+                return;
         }
+        this.setValue({ mod: this.cur.mod + this.cur.adj + this.cur.pb * this.value.chkbx });
+    }
     return this;
 }
 /**************************************/
@@ -311,7 +344,8 @@ function CheckboxCountField(options) {
         parent: "",
         readOnly: false,
         label: "Field Label",
-        length: 2
+        length: 2,
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
@@ -319,6 +353,8 @@ function CheckboxCountField(options) {
     this.readOnly = options.readOnly;
     this.value = 0;
     this.length = options.length;
+    this.update = options.update;
+    this.cur = Object.create(null);
 /******************/
     this.root = document.createElement("div");
     this.root.classList.add(this.name);
@@ -393,6 +429,17 @@ CheckboxCountField.prototype.setValue = function(value) {
     return this;
 }
 /**************************************/
+CheckboxCountField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+CheckboxCountField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
+    return this;
+}
+/**************************************/
 CheckboxCountField.prototype.clear = function() {
     this.setValue(0);
     return this;
@@ -406,13 +453,16 @@ function AtField(options) {
     options = Object.assign({
         parent: "",
         readOnly: false,
-        fontSize: "1em"
+        fontSize: "1em",
+        update: ""
     }, options);
 /******************/
     this.name = "at";
     this.parent = options.parent;
     this.readOnly = options.readOnly;
     this.fontSize = options.fontSize;
+    this.update = options.update;
+    this.cur = Object.create(null);
     this.value = { wpn: [
         { name: "", atk: "", damage: "" },
         { name: "", atk: "", damage: "" },
@@ -537,6 +587,17 @@ AtField.prototype.setValue = function(value) {
     return this;
 }
 /**************************************/
+AtField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+AtField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
+    return this;
+}
+/**************************************/
 AtField.prototype.checkWidth = function(row, fld) {
     if (!this.field.innerText) return;
     let font = this.fontSize.match(/(\d+)(\D{1,2})/);
@@ -570,7 +631,8 @@ function DropdownImageField(options) {
         fontSize: "1em",
         list: [],
         timeout: 1000,
-        editable: false
+        editable: false,
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
@@ -578,6 +640,8 @@ function DropdownImageField(options) {
     this.readOnly = options.readOnly;
     this.defaultFontSize = options.fontSize;
     this.fontSize = "";
+    this.update = options.update;
+    this.cur = Object.create(null);
     this.value = { value: "", image: "" };
     this.beforeEdit = options.beforeEdit;
     this.afterEdit = options.afterEdit;
@@ -767,6 +831,17 @@ DropdownImageField.prototype.setValue = function(value) {
     return this;
 }
 /**************************************/
+DropdownImageField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+DropdownImageField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
+    return this;
+}
+/**************************************/
 DropdownImageField.prototype.checkWidth = function() {
     if (!this.field.field.innerText) return;
     let font = this.fontSize.match(/(\d+)(\D{1,2})/);
@@ -791,13 +866,16 @@ function SpellListField(options) {
         label: "0",
         fontSize: "1em",
         isCantrip: false,
-        spells: 9
+        spells: 9,
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
     this.parent = options.parent;
     this.readOnly = options.readOnly;
     this.fontSize = options.fontSize;
+    this.update = options.update;
+    this.cur = Object.create(null);
     if (options.isCantrip) this.value = { spells: [] };
     else this.value = { total: "", expend: "", selected: [], spells: [] };
     this.isEditing = [];
@@ -961,6 +1039,17 @@ SpellListField.prototype.setValue = function(value) {
                 this.field.spells[i].innerText = value.spells[i];
                 this.checkWidth(i);
             }
+    return this;
+}
+/**************************************/
+SpellListField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+SpellListField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
     return this;
 }
 /**************************************/

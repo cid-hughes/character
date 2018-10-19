@@ -70,6 +70,12 @@ Page.prototype.updatedField = function(fieldName, value) {
     return this;
 }
 /**************************************/
+Page.prototype.updateFields = function(fieldName, value) {
+    for (let fn of Object.keys(this.fields))
+        this.fields[fn].updatedField(fieldName, value);
+    return this;
+}
+/**************************************/
 Page.prototype.getValues = function() {
     let values = Object.create(null);
     for (let fieldName of Object.keys(this.fields))
@@ -183,7 +189,8 @@ function BasicField(options) {
         label: "Field Label",
         beforeEdit: "",
         afterEdit: this.checkWidth,
-        fontSize: "1em"
+        fontSize: "1em",
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
@@ -191,6 +198,8 @@ function BasicField(options) {
     this.readOnly = options.readOnly;
     this.defaultFontSize = options.fontSize;
     this.fontSize = "";
+    this.update = options.update;
+    this.cur = Object.create(null);
     this.value = "";
     this.beforeEdit = options.beforeEdit;
     this.afterEdit = options.afterEdit;
@@ -290,6 +299,17 @@ BasicField.prototype.setValue = function(value) {
     return this;
 }
 /**************************************/
+BasicField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+BasicField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
+    return this;
+}
+/**************************************/
 BasicField.prototype.checkWidth = function() {
     if (!this.field.innerText) return;
     let font = this.fontSize.match(/(\d+)(\D{1,2})/);
@@ -329,12 +349,15 @@ function CheckboxField(options) {
         classes: [],
         parent: "",
         readOnly: false,
-        label: "Field Label"
+        label: "Field Label",
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
     this.parent = options.parent;
     this.readOnly = options.readOnly;
+    this.update = options.update;
+    this.cur = Object.create(null);
     this.value = false;
 /******************/
     this.root = document.createElement("div");
@@ -401,6 +424,17 @@ CheckboxField.prototype.setValue = function(value) {
         this.value = false;
         this.field.classList.remove("check");
     }
+    return this;
+}
+/**************************************/
+CheckboxField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+CheckboxField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
     return this;
 }
 /**************************************/
@@ -530,12 +564,15 @@ function ImageField(options) {
         classes: [],
         parent: "",
         readOnly: false,
-        label: "Field Label"
+        label: "Field Label",
+        update: ""
     }, options);
 /******************/
     this.name = options.name;
     this.parent = options.parent;
     this.readOnly = options.readOnly;
+    this.update = options.update;
+    this.cur = Object.create(null);
     this.value = "";
 /******************/
     this.root = document.createElement("div");
@@ -614,6 +651,17 @@ ImageField.prototype.setValue = function(value) {
         this.field.appendChild(document.createElement("img"));
     }
     this.value = value;
+    return this;
+}
+/**************************************/
+ImageField.prototype.updateFunction = function(func) {
+    this.update = func;
+    return this;
+}
+/**************************************/
+ImageField.prototype.updatedField = function(fieldName, value) {
+    if (typeof this.update === "function")
+        this.update(this, fieldName, value);
     return this;
 }
 /**************************************/

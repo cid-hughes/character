@@ -71,6 +71,31 @@ view.modal = Object.create(null);
 /**************************************/
 //view.modal.[modal] = new Modal({});
 /******************************************************************************/
+view.func = Object.create(null);
+view.func.ppuf = (f,n,v)=>{
+    if (f.cur.cb === undefined)
+        f.cur.mod = f.cur.adj = f.cur.pb = f.cur.cb = 0;
+    switch (n) {
+        case "wis":
+            if (f.cur.mod !== v.mod)
+                f.cur.mod = parseInt(v.mod);
+            break;
+        case "prof-bonus":
+            if (f.cur.pb !== v)
+                f.cur.pb = parseInt(v);
+            break;
+        case "perc":
+            if (f.cur.cb !== v.chkbx)
+                f.cur.cb = v.chkbx;
+            if ((f.cur.mod + f.cur.adj + f.cur.pb * f.cur.cb) !== v.mod)
+                f.cur.adj = parseInt(v.mod) - (f.cur.mod + f.cur.pb * f.cur.cb);
+            break;
+        default:
+            return;
+    }
+    f.setValue(10 + f.cur.mod + f.cur.adj + f.cur.pb * f.cur.cb);
+}
+/******************************************************************************/
 view.page = [];
 /**************************************/
 [   { name: "name", label: "Character Name", fontSize: "1.2em" },
@@ -136,35 +161,35 @@ view.page[0].lastElement.lastElement.lastElement.lastElement.addField(new StatFi
 view.page[0].lastElement.lastElement.lastElement.lastElement.addField(new ModField({ name: "prof-bonus", label: "Proficiency Bonus", fontSize: "1.4em" }).changeOrder());
 view.page[0].lastElement.lastElement.lastElement.lastElement.addContainer(new Container({ name: "sv" }));
 for (let field of [
-    { name: "sv-str", label: "Strength" },
-    { name: "sv-dex", label: "Dexterity" },
-    { name: "sv-con", label: "Constitution" },
-    { name: "sv-int", label: "Intelligence" },
-    { name: "sv-wis", label: "Wisdom" },
-    { name: "sv-cha", label: "Charisma" }
+    { name: "sv-str", label: "Strength", update: "str" },
+    { name: "sv-dex", label: "Dexterity", update: "dex" },
+    { name: "sv-con", label: "Constitution", update: "con" },
+    { name: "sv-int", label: "Intelligence", update: "int" },
+    { name: "sv-wis", label: "Wisdom", update: "wis" },
+    { name: "sv-cha", label: "Charisma", update: "cha" }
 ]) view.page[0].lastElement.lastElement.lastElement.lastElement.lastElement.addField(new CheckboxModField(field).changeOrder());
 view.page[0].lastElement.lastElement.lastElement.lastElement.addContainer(new Container({ name: "sk" }));
 for (let field of [
-    { name: "acro", label: "Acrobatics", canDouble: true },
-    { name: "anim", label: "Animal Handling", canDouble: true },
-    { name: "arca", label: "Arcana", canDouble: true },
-    { name: "athl", label: "Athletics", canDouble: true },
-    { name: "dece", label: "Deception", canDouble: true },
-    { name: "hist", label: "History", canDouble: true },
-    { name: "insi", label: "Insight", canDouble: true },
-    { name: "inti", label: "Intimidate", canDouble: true },
-    { name: "inve", label: "Investigation", canDouble: true },
-    { name: "medi", label: "Medicine", canDouble: true },
-    { name: "natu", label: "Nature", canDouble: true },
-    { name: "perc", label: "Perception", canDouble: true },
-    { name: "perf", label: "Performance", canDouble: true },
-    { name: "pers", label: "Persuasion", canDouble: true },
-    { name: "reli", label: "Religion", canDouble: true },
-    { name: "slei", label: "Sleight of Hand", canDouble: true },
-    { name: "stea", label: "Stealth", canDouble: true },
-    { name: "surv", label: "Survival", canDouble: true }
+    { name: "acro", label: "Acrobatics", update: "dex", canDouble: true },
+    { name: "anim", label: "Animal Handling", update: "wis", canDouble: true },
+    { name: "arca", label: "Arcana", update: "int", canDouble: true },
+    { name: "athl", label: "Athletics", update: "str", canDouble: true },
+    { name: "dece", label: "Deception", update: "cha", canDouble: true },
+    { name: "hist", label: "History", update: "int", canDouble: true },
+    { name: "insi", label: "Insight", update: "wis", canDouble: true },
+    { name: "inti", label: "Intimidate", update: "cha", canDouble: true },
+    { name: "inve", label: "Investigation", update: "int", canDouble: true },
+    { name: "medi", label: "Medicine", update: "wis", canDouble: true },
+    { name: "natu", label: "Nature", update: "int", canDouble: true },
+    { name: "perc", label: "Perception", update: "wis", canDouble: true },
+    { name: "perf", label: "Performance", update: "cha", canDouble: true },
+    { name: "pers", label: "Persuasion", update: "cha", canDouble: true },
+    { name: "reli", label: "Religion", update: "int", canDouble: true },
+    { name: "slei", label: "Sleight of Hand", update: "dex", canDouble: true },
+    { name: "stea", label: "Stealth", update: "dex", canDouble: true },
+    { name: "surv", label: "Survival", update: "wis", canDouble: true }
 ]) view.page[0].lastElement.lastElement.lastElement.lastElement.lastElement.addField(new CheckboxModField(field).changeOrder());
-view.page[0].lastElement.lastElement.addField(new StatField({ name: "pass-perc", label: "Passive Perception", fontSize: "1.4em" }).changeOrder());
+view.page[0].lastElement.lastElement.addField(new StatField({ name: "pass-perc", label: "Passive Perception", fontSize: "1.4em", update: view.func.ppuf }).changeOrder());
 view.page[0].lastElement.lastElement.addField(new TextboxField({ name: "proficiencies", label: "Proficiencies & Languages" }).changeOrder());
 /******************/
 view.page[0].lastElement.addContainer(new Container({ name: "c-pg" }));
@@ -224,7 +249,21 @@ view.page[1].lastElement.lastElement.lastElement.addField(new DropdownImageField
     { label: "The Lords' Alliance",       value: "img/factions/the%20lords'%20alliance.png"           },
     { label: "The Order of the Gauntlet", value: "img/factions/the%20order%20of%20the%20gauntlet.png" },
     { label: "The Raven Queen",           value: "img/factions/the%20raven%20queen.jpg"               },
-    { label: "The Zhentarim",             value: "img/factions/the%20zhentarim.png"                   }
+    { label: "The Zhentarim",             value: "img/factions/the%20zhentarim.png"                   },
+    { label: "House Medani",              value: "img/factions/detection%20medani.jpg"                },
+    { label: "House Tharashk",            value: "img/factions/finding%20tharashk.jpg"                },
+    { label: "House Vadalis",             value: "img/factions/handling%20vadalis.jpg"                },
+    { label: "House Jorasco",             value: "img/factions/healing%20jorasco.jpg"                 },
+    { label: "House Ghallanda",           value: "img/factions/hospitality%20ghallanda.jpg"           },
+    { label: "House Cannith",             value: "img/factions/making%20cannith.jpg"                  },
+    { label: "House Orien",               value: "img/factions/passage%20orien.jpg"                   },
+    { label: "House Sivis",               value: "img/factions/scribing%20sivis.jpg"                  },
+    { label: "House Deneith",             value: "img/factions/sentinel%20deneith.jpg"                },
+    { label: "House Phiarlan",            value: "img/factions/shadow%20phiarlan.jpg"                 },
+    { label: "House Thurannil",           value: "img/factions/shadow%20thurannil.jpg"                },
+    { label: "House Lyrandar",            value: "img/factions/storm%20lyrandar.jpg"                  },
+    { label: "House Kundarak",            value: "img/factions/warding%20kundarak.jpg"                },
+    { label: "House Tarkanan",            value: "img/factions/aberrant%20tarkanan.jpg"               }
 ], classes: [ "ctr" ], editable: true }).changeOrder());
 for (let field of [
     { name: "add-feats", label: "Additional Features & Traits" },

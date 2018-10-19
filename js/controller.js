@@ -20,6 +20,7 @@ controller.save = function() {
     controller.list();
 }
 controller.handleUpdate = function(fieldName, value) {
+    view.page.forEach(p=>p.updateFields(fieldName, value));
     value = model.character.update(fieldName, value, controller.currentData);
     view.page.forEach(p=>p.setValues(value));
     controller.currentData = JSON.parse(JSON.stringify(view.page.reduce((a, p)=>Object.assign(a, p.getValues()), {})));
